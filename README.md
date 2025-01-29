@@ -90,5 +90,4 @@ Networking and Security:
 - Security groups ensure secure communication between ALB, Nginx, and Vercel.
 
 
-
-![alt text](image.png)
+![alt text](image-1.png)
