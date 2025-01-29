@@ -1,0 +1,439 @@
+{
+ "Resources": {
+  "NginxVpcFE1B165E": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "NginxProxyStack/NginxVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxVpc/Resource"
+   }
+  },
+  "NginxVpcPublicSubnet1SubnetFD3CAA71": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/17",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "NginxProxyStack/NginxVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet1/Subnet"
+   }
+  },
+  "NginxVpcPublicSubnet1RouteTableDE29045F": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "NginxProxyStack/NginxVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "NginxVpcPublicSubnet1RouteTableAssociation8988997E": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NginxVpcPublicSubnet1RouteTableDE29045F"
+    },
+    "SubnetId": {
+     "Ref": "NginxVpcPublicSubnet1SubnetFD3CAA71"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "NginxVpcPublicSubnet1DefaultRoute8E2C4B50": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NginxVpcPublicSubnet1RouteTableDE29045F"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "NginxVpcIGW5BF51E51"
+    }
+   },
+   "DependsOn": [
+    "NginxVpcVPCGWA22A08F1"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "NginxVpcIsolatedSubnet1Subnet9CA57C33": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/17",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "NginxProxyStack/NginxVpc/IsolatedSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/Subnet"
+   }
+  },
+  "NginxVpcIsolatedSubnet1RouteTable7BA216E2": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "NginxProxyStack/NginxVpc/IsolatedSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/RouteTable"
+   }
+  },
+  "NginxVpcIsolatedSubnet1RouteTableAssociationB974B368": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NginxVpcIsolatedSubnet1RouteTable7BA216E2"
+    },
+    "SubnetId": {
+     "Ref": "NginxVpcIsolatedSubnet1Subnet9CA57C33"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/RouteTableAssociation"
+   }
+  },
+  "NginxVpcIGW5BF51E51": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "NginxProxyStack/NginxVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxVpc/IGW"
+   }
+  },
+  "NginxVpcVPCGWA22A08F1": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    },
+    "InternetGatewayId": {
+     "Ref": "NginxVpcIGW5BF51E51"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxVpc/VPCGW"
+   }
+  },
+  "NginxSecurityGroupFD5E8C12": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Allow HTTP, HTTPS and SSH traffic",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow HTTP traffic",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow HTTPS traffic",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow SSH traffic",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
+     }
+    ],
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxSecurityGroup/Resource"
+   }
+  },
+  "NginxKeyPair": {
+   "Type": "AWS::EC2::KeyPair",
+   "Properties": {
+    "KeyName": "nginx-key-pair"
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxKeyPair"
+   }
+  },
+  "NginxInstanceInstanceRole65BF5669": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "NginxProxyStack/NginxInstance"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxInstance/InstanceRole/Resource"
+   }
+  },
+  "NginxInstanceInstanceProfile9F91A2EA": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "NginxInstanceInstanceRole65BF5669"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxInstance/InstanceProfile"
+   }
+  },
+  "NginxInstance1675945E": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "IamInstanceProfile": {
+     "Ref": "NginxInstanceInstanceProfile9F91A2EA"
+    },
+    "ImageId": "ami-0672fd5b9210aa093",
+    "InstanceType": "t2.micro",
+    "KeyName": "nginx-key-pair",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "NginxSecurityGroupFD5E8C12",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": {
+     "Ref": "NginxVpcPublicSubnet1SubnetFD3CAA71"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "NginxProxyStack/NginxInstance"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\n\n# Default server block\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    server_name _;\n\n    # For the main website\n    location / {\n        proxy_pass https://www.bim.com.sg;\n        proxy_set_header Host www.bim.com.sg;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    # For Next.js static files in jobs section\n    location /_next/ {\n        proxy_pass https://jobs.bimeco.io/_next/;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    # For the jobs section\n    location /jobs {\n        # Rewrite /jobs to /career\n        rewrite ^/jobs(/.*)?\\$ /career\\$1 break;\n        proxy_pass https://jobs.bimeco.io;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    # error handling\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\n\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
+    }
+   },
+   "DependsOn": [
+    "NginxInstanceInstanceRole65BF5669"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxInstance/Resource"
+   }
+  },
+  "NginxElasticIP": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc"
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxElasticIP"
+   }
+  },
+  "NginxElasticIPAssociation": {
+   "Type": "AWS::EC2::EIPAssociation",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "NginxElasticIP",
+      "AllocationId"
+     ]
+    },
+    "InstanceId": {
+     "Ref": "NginxInstance1675945E"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxElasticIPAssociation"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12QT2vDMAzFP8vujvuHHXYtpZSww0wyeh2OqzK1iR1sqSWEfPd6c1qPnd7TD+tJ1lq+ruTyRd9CYY6XosVGjjVpcxERfY1g1nI89EZsT/agtkJx06KpubFAPyy7yjHBp25ayDyzTQjOoCZ09vlYKI9XTZAzSkvgo99HetPDPHSuNhTX+u7AkqjBsEca9t5x/zvuP3iHQWn0orSBtDWQ0rPflWqWP5tNAnUnx8qlPzz00ae8O2EL0yQqCI59Svpg6jldYKaTsO4I8hwW19WbXMbrngNi4dkSdiCrpHeCN/gdeQEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "RootLink": {
+   "Description": "HTTP link associated with the NGINX proxy server for root",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "http://",
+      {
+       "Ref": "NginxElasticIP"
+      }
+     ]
+    ]
+   }
+  },
+  "JobsLink": {
+   "Description": "HTTP link associated with the NGINX proxy server for jobs",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "http://",
+      {
+       "Ref": "NginxElasticIP"
+      },
+      "/jobs"
+     ]
+    ]
+   }
+  },
+  "KeyPairName": {
+   "Description": "The name of the created key pair",
+   "Value": "nginx-key-pair"
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

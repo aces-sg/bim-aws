@@ -1,0 +1,184 @@
+{
+  "version": "21.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "NginxProxyStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "NginxProxyStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "NginxProxyStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/ap-southeast-1",
+      "properties": {
+        "templateFile": "NginxProxyStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-ap-southeast-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-ap-southeast-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/9c0fece9042b9f371af9548e38eae95cda1ae273cc1baa0bd1d6fe9684ba58f5.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "NginxProxyStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-ap-southeast-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "NginxProxyStack.assets"
+      ],
+      "metadata": {
+        "/NginxProxyStack/NginxVpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcFE1B165E"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcPublicSubnet1SubnetFD3CAA71"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcPublicSubnet1RouteTableDE29045F"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcPublicSubnet1RouteTableAssociation8988997E"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcPublicSubnet1DefaultRoute8E2C4B50"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/IsolatedSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcIsolatedSubnet1Subnet9CA57C33"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/IsolatedSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcIsolatedSubnet1RouteTable7BA216E2"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/IsolatedSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcIsolatedSubnet1RouteTableAssociationB974B368"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcIGW5BF51E51"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcVPCGWA22A08F1"
+          }
+        ],
+        "/NginxProxyStack/NginxSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxSecurityGroupFD5E8C12"
+          }
+        ],
+        "/NginxProxyStack/NginxKeyPair": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxKeyPair"
+          }
+        ],
+        "/NginxProxyStack/NginxInstance/InstanceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxInstanceInstanceRole65BF5669"
+          }
+        ],
+        "/NginxProxyStack/NginxInstance/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxInstanceInstanceProfile9F91A2EA"
+          }
+        ],
+        "/NginxProxyStack/NginxInstance/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxInstance1675945E"
+          }
+        ],
+        "/NginxProxyStack/NginxElasticIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxElasticIP"
+          }
+        ],
+        "/NginxProxyStack/NginxElasticIPAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxElasticIPAssociation"
+          }
+        ],
+        "/NginxProxyStack/RootLink": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RootLink"
+          }
+        ],
+        "/NginxProxyStack/JobsLink": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "JobsLink"
+          }
+        ],
+        "/NginxProxyStack/KeyPairName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KeyPairName"
+          }
+        ],
+        "/NginxProxyStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/NginxProxyStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/NginxProxyStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "NginxProxyStack"
+    }
+  }
+}
