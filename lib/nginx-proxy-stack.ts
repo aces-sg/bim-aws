@@ -108,9 +108,8 @@ server {
     }
 
     # For the jobs section
-    location /jobs {
+    location /career {
         # Rewrite /jobs to /career
-        rewrite ^/jobs(/.*)?\\$ /career\\$1 break;
         proxy_pass https://jobs.bimeco.io;
         proxy_set_header Host jobs.bimeco.io;
         proxy_set_header X-Real-IP \\$remote_addr;
@@ -151,6 +150,7 @@ EOF'`,
         "ap-southeast-1": "ami-0672fd5b9210aa093",
       }),
       userData,
+      userDataCausesReplacement: true,
     });
 
     // Add EC2 instance to target group using InstanceTarget

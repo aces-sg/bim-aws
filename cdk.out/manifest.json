@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-ap-southeast-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-ap-southeast-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/51781f7cbf3802b27a045105d34c922a913afe014ddf91fab904e72b946e2915.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/0ba9fbfaab0b1f7e215ceb9582fc02bc690cd1708235faae53dc2b7f32859653.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -186,7 +186,7 @@
         "/NginxProxyStack/NginxInstance/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "NginxInstance1675945E"
+            "data": "NginxInstance1675945E77560d183f7de7d0"
           }
         ],
         "/NginxProxyStack/LoadBalancerDNS": [
