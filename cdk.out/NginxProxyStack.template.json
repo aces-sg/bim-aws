@@ -364,6 +364,13 @@
       "FromPort": 80,
       "IpProtocol": "tcp",
       "ToPort": 80
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow from anyone on port 443",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
      }
     ],
     "VpcId": {
@@ -445,7 +452,30 @@
     "aws:cdk:path": "NginxProxyStack/NginxAlb/Resource"
    }
   },
-  "NginxAlbHttpListener568EB36E": {
+  "NginxAlbRedirect80To4438A980C0E": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "RedirectConfig": {
+       "Port": "443",
+       "Protocol": "HTTPS",
+       "StatusCode": "HTTP_301"
+      },
+      "Type": "redirect"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "NginxAlb10923154"
+    },
+    "Port": 80,
+    "Protocol": "HTTP"
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxAlb/Redirect80To443/Resource"
+   }
+  },
+  "NginxAlbHttpsListenerDE052181": {
    "Type": "AWS::ElasticLoadBalancingV2::Listener",
    "Properties": {
     "DefaultActions": [
@@ -459,11 +489,28 @@
     "LoadBalancerArn": {
      "Ref": "NginxAlb10923154"
     },
-    "Port": 80,
-    "Protocol": "HTTP"
+    "Certificates": [
+     {
+      "CertificateArn": {
+       "Ref": "NginxCertificate26E222C0"
+      }
+     }
+    ],
+    "Port": 443,
+    "Protocol": "HTTPS"
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxAlb/HttpListener/Resource"
+    "aws:cdk:path": "NginxProxyStack/NginxAlb/HttpsListener/Resource"
+   }
+  },
+  "NginxCertificate26E222C0": {
+   "Type": "AWS::CertificateManager::Certificate",
+   "Properties": {
+    "DomainName": "staging.bim.com.sg",
+    "ValidationMethod": "DNS"
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxCertificate/Resource"
    }
   },
   "NginxTargetGroup6C5FCDE3": {
@@ -583,7 +630,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1VRwW6DMAz9lt1D1lY77Mp6qCpVGoKq1ykEt3MbEpQ4VBXi35cSGPTk52fHfs/Z8I81X72Ju0tkdUsUlrwrSMgbC9RPB3LDu1Mj2fasT9mWZb5UKAtfaqAnN6PceIKjKBXM/MylzhmJgtDo/2aWWWwFwTxjrwlswLvA3sVjXDpmKQVZvzVoYgVIb5EeO2t8M6x7IfbakdAS4siIewZKOEKpjKhKoQKH+tIGd2nTBEuDtEOofQ01sM/HL/myDx2BHnsmvKgfhb0EF5O6RdozFDXvchPPNMVJZWbNGRX0PcvBGW+jh29PjY9HHtmeaVMBv7r3dv3JV+EDrw4xsV4T1sDzGP8Af5GzwNwBAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WRwW7CMAyGn2X3kAHaYdeOA0JCWtUirpMbDDOkSZU4Rajquy+l7VpOsT//sf0na/mxkss3uPuFOt0WmgrZ5AzqJiL6aVCtZXOslNiczTHdiDQUmlQeCoPcsSnKbGA8QKFx4hNLvLeKgMmaf7FIHdXAOPXYGUYX422kd3gMQ4cs4bjWb4mGRY4qOOLH1tlQPce9gJ3xDEZh37KPW4EaPJPSFk4F6MjIXOroLqmqaOm52j7Wvp41dN3ll3yuI89oBs0Yz+oHcJfoYtxulrYitmI6d0IswcAFnWw2E+v0s7QVBKVsMts/63iOrlJnz6SxbUWG3gbXe/4OXIX+UwbaCmNPKK/+vV59ymX88KsnWrhgmEqUWX/+AUL3RaUMAgAA"
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStack/CDKMetadata/Default"

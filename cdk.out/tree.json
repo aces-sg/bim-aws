@@ -548,6 +548,13 @@
                         "fromPort": 80,
                         "toPort": 80,
                         "description": "Allow HTTP traffic"
+                      },
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 443,
+                        "toPort": 443,
+                        "description": "Allow from anyone on port 443"
                       }
                     ],
                     "vpcId": {
@@ -655,21 +662,23 @@
                   "version": "2.41.0"
                 }
               },
-              "HttpListener": {
-                "id": "HttpListener",
-                "path": "NginxProxyStack/NginxAlb/HttpListener",
+              "Redirect80To443": {
+                "id": "Redirect80To443",
+                "path": "NginxProxyStack/NginxAlb/Redirect80To443",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "NginxProxyStack/NginxAlb/HttpListener/Resource",
+                    "path": "NginxProxyStack/NginxAlb/Redirect80To443/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::Listener",
                       "aws:cdk:cloudformation:props": {
                         "defaultActions": [
                           {
-                            "type": "forward",
-                            "targetGroupArn": {
-                              "Ref": "NginxTargetGroup6C5FCDE3"
+                            "type": "redirect",
+                            "redirectConfig": {
+                              "statusCode": "HTTP_301",
+                              "port": "443",
+                              "protocol": "HTTPS"
                             }
                           }
                         ],
@@ -690,10 +699,78 @@
                   "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListener",
                   "version": "2.41.0"
                 }
+              },
+              "HttpsListener": {
+                "id": "HttpsListener",
+                "path": "NginxProxyStack/NginxAlb/HttpsListener",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "NginxProxyStack/NginxAlb/HttpsListener/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::Listener",
+                      "aws:cdk:cloudformation:props": {
+                        "defaultActions": [
+                          {
+                            "type": "forward",
+                            "targetGroupArn": {
+                              "Ref": "NginxTargetGroup6C5FCDE3"
+                            }
+                          }
+                        ],
+                        "loadBalancerArn": {
+                          "Ref": "NginxAlb10923154"
+                        },
+                        "certificates": [
+                          {
+                            "certificateArn": {
+                              "Ref": "NginxCertificate26E222C0"
+                            }
+                          }
+                        ],
+                        "port": 443,
+                        "protocol": "HTTPS"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListener",
+                      "version": "2.41.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListener",
+                  "version": "2.41.0"
+                }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationLoadBalancer",
+              "version": "2.41.0"
+            }
+          },
+          "NginxCertificate": {
+            "id": "NginxCertificate",
+            "path": "NginxProxyStack/NginxCertificate",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "NginxProxyStack/NginxCertificate/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CertificateManager::Certificate",
+                  "aws:cdk:cloudformation:props": {
+                    "domainName": "staging.bim.com.sg",
+                    "validationMethod": "DNS"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_certificatemanager.CfnCertificate",
+                  "version": "2.41.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_certificatemanager.Certificate",
               "version": "2.41.0"
             }
           },

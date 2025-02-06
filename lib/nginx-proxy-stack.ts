@@ -3,6 +3,7 @@ import { Construct } from "constructs";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import * as targets from "aws-cdk-lib/aws-elasticloadbalancingv2-targets";
+import * as acm from "aws-cdk-lib/aws-certificatemanager";
 
 export class NginxProxyStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -53,6 +54,12 @@ export class NginxProxyStack extends cdk.Stack {
       securityGroup: albSecurityGroup,
     });
 
+        // Create ACM certificate
+    const certificate = new acm.Certificate(this, "NginxCertificate", {
+      domainName: "staging.bim.com.sg",
+      validation: acm.CertificateValidation.fromDns(),
+    });
+
     // Create target group
     const targetGroup = new elbv2.ApplicationTargetGroup(
       this,
@@ -70,9 +77,12 @@ export class NginxProxyStack extends cdk.Stack {
     );
 
     // Create HTTP listener
-    alb.addListener("HttpListener", {
-      port: 80,
+    alb.addRedirect();
+
+    alb.addListener("HttpsListener", {
+      port: 443,
       defaultAction: elbv2.ListenerAction.forward([targetGroup]),
+      certificates: [elbv2.ListenerCertificate.fromCertificateManager(certificate)],
     });
 
     // Create user data with simplified Nginx configuration

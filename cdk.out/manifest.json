@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-ap-southeast-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-ap-southeast-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/0ba9fbfaab0b1f7e215ceb9582fc02bc690cd1708235faae53dc2b7f32859653.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/dfde76898459467904f437770e2d5b41656c679ee882f5c8cd2aca25871862a8.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -159,10 +159,22 @@
             "data": "NginxAlb10923154"
           }
         ],
-        "/NginxProxyStack/NginxAlb/HttpListener/Resource": [
+        "/NginxProxyStack/NginxAlb/Redirect80To443/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "NginxAlbHttpListener568EB36E"
+            "data": "NginxAlbRedirect80To4438A980C0E"
+          }
+        ],
+        "/NginxProxyStack/NginxAlb/HttpsListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxAlbHttpsListenerDE052181"
+          }
+        ],
+        "/NginxProxyStack/NginxCertificate/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxCertificate26E222C0"
           }
         ],
         "/NginxProxyStack/NginxTargetGroup/Resource": [
