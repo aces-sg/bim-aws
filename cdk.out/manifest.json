@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-ap-southeast-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-ap-southeast-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/9c0fece9042b9f371af9548e38eae95cda1ae273cc1baa0bd1d6fe9684ba58f5.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/51781f7cbf3802b27a045105d34c922a913afe014ddf91fab904e72b946e2915.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -69,6 +69,30 @@
             "data": "NginxVpcPublicSubnet1DefaultRoute8E2C4B50"
           }
         ],
+        "/NginxProxyStack/NginxVpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcPublicSubnet2Subnet070965F9"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcPublicSubnet2RouteTableD2BFAC61"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcPublicSubnet2RouteTableAssociationE6BE9BCB"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcPublicSubnet2DefaultRouteFFF221F2"
+          }
+        ],
         "/NginxProxyStack/NginxVpc/IsolatedSubnet1/Subnet": [
           {
             "type": "aws:cdk:logicalId",
@@ -87,6 +111,24 @@
             "data": "NginxVpcIsolatedSubnet1RouteTableAssociationB974B368"
           }
         ],
+        "/NginxProxyStack/NginxVpc/IsolatedSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcIsolatedSubnet2SubnetB99DDB07"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/IsolatedSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcIsolatedSubnet2RouteTable5365FB87"
+          }
+        ],
+        "/NginxProxyStack/NginxVpc/IsolatedSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxVpcIsolatedSubnet2RouteTableAssociationD8F91B56"
+          }
+        ],
         "/NginxProxyStack/NginxVpc/IGW": [
           {
             "type": "aws:cdk:logicalId",
@@ -99,16 +141,34 @@
             "data": "NginxVpcVPCGWA22A08F1"
           }
         ],
+        "/NginxProxyStack/AlbSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AlbSecurityGroup86A59E99"
+          }
+        ],
         "/NginxProxyStack/NginxSecurityGroup/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "NginxSecurityGroupFD5E8C12"
           }
         ],
-        "/NginxProxyStack/NginxKeyPair": [
+        "/NginxProxyStack/NginxAlb/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "NginxKeyPair"
+            "data": "NginxAlb10923154"
+          }
+        ],
+        "/NginxProxyStack/NginxAlb/HttpListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxAlbHttpListener568EB36E"
+          }
+        ],
+        "/NginxProxyStack/NginxTargetGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxTargetGroup6C5FCDE3"
           }
         ],
         "/NginxProxyStack/NginxInstance/InstanceRole/Resource": [
@@ -129,34 +189,10 @@
             "data": "NginxInstance1675945E"
           }
         ],
-        "/NginxProxyStack/NginxElasticIP": [
+        "/NginxProxyStack/LoadBalancerDNS": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "NginxElasticIP"
-          }
-        ],
-        "/NginxProxyStack/NginxElasticIPAssociation": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NginxElasticIPAssociation"
-          }
-        ],
-        "/NginxProxyStack/RootLink": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "RootLink"
-          }
-        ],
-        "/NginxProxyStack/JobsLink": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "JobsLink"
-          }
-        ],
-        "/NginxProxyStack/KeyPairName": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "KeyPairName"
+            "data": "LoadBalancerDNS"
           }
         ],
         "/NginxProxyStack/CDKMetadata/Default": [
