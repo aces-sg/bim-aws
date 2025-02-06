@@ -554,7 +554,7 @@
                         "ipProtocol": "tcp",
                         "fromPort": 443,
                         "toPort": 443,
-                        "description": "Allow from anyone on port 443"
+                        "description": "Allow HTTPS traffic"
                       }
                     ],
                     "vpcId": {
@@ -583,7 +583,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
                   "aws:cdk:cloudformation:props": {
-                    "groupDescription": "Security group for Nginx instance",
+                    "groupDescription": "Security group for Nginx instances",
                     "securityGroupEgress": [
                       {
                         "cidrIp": "0.0.0.0/0",
@@ -612,6 +612,35 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.41.0"
+                }
+              },
+              "from NginxProxyStackAlbSecurityGroup8F613DE3:80": {
+                "id": "from NginxProxyStackAlbSecurityGroup8F613DE3:80",
+                "path": "NginxProxyStack/NginxSecurityGroup/from NginxProxyStackAlbSecurityGroup8F613DE3:80",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "Load balancer to target",
+                    "fromPort": 80,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "NginxSecurityGroupFD5E8C12",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "AlbSecurityGroup86A59E99",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 80
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
                   "version": "2.41.0"
                 }
               }
@@ -774,6 +803,126 @@
               "version": "2.41.0"
             }
           },
+          "NginxLaunchTemplate": {
+            "id": "NginxLaunchTemplate",
+            "path": "NginxProxyStack/NginxLaunchTemplate",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "NginxProxyStack/NginxLaunchTemplate/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::LaunchTemplate",
+                  "aws:cdk:cloudformation:props": {
+                    "launchTemplateData": {
+                      "imageId": "ami-0672fd5b9210aa093",
+                      "instanceType": "t2.micro",
+                      "securityGroupIds": [
+                        {
+                          "Fn::GetAtt": [
+                            "NginxSecurityGroupFD5E8C12",
+                            "GroupId"
+                          ]
+                        }
+                      ],
+                      "tagSpecifications": [
+                        {
+                          "resourceType": "instance",
+                          "tags": [
+                            {
+                              "key": "Name",
+                              "value": "NginxProxyStack/NginxLaunchTemplate"
+                            }
+                          ]
+                        },
+                        {
+                          "resourceType": "volume",
+                          "tags": [
+                            {
+                              "key": "Name",
+                              "value": "NginxProxyStack/NginxLaunchTemplate"
+                            }
+                          ]
+                        }
+                      ],
+                      "userData": {
+                        "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    server_name _;\n\n    location / {\n        proxy_pass https://www.bim.com.sg;\n        proxy_set_header Host www.bim.com.sg;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /_next/ {\n        proxy_pass https://jobs.bimeco.io/_next/;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /career {\n        proxy_pass https://jobs.bimeco.io;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location /health {\n        access_log off;\n        return 200 'Healthy';\n    }\n\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
+                      }
+                    },
+                    "tagSpecifications": [
+                      {
+                        "resourceType": "launch-template",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "NginxProxyStack/NginxLaunchTemplate"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnLaunchTemplate",
+                  "version": "2.41.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.LaunchTemplate",
+              "version": "2.41.0"
+            }
+          },
+          "NginxAsg": {
+            "id": "NginxAsg",
+            "path": "NginxProxyStack/NginxAsg",
+            "children": {
+              "ASG": {
+                "id": "ASG",
+                "path": "NginxProxyStack/NginxAsg/ASG",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::AutoScaling::AutoScalingGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "maxSize": "4",
+                    "minSize": "3",
+                    "healthCheckGracePeriod": 120,
+                    "healthCheckType": "ELB",
+                    "launchTemplate": {
+                      "launchTemplateId": {
+                        "Ref": "NginxLaunchTemplate4364E9F8"
+                      },
+                      "version": {
+                        "Fn::GetAtt": [
+                          "NginxLaunchTemplate4364E9F8",
+                          "LatestVersionNumber"
+                        ]
+                      }
+                    },
+                    "targetGroupArns": [
+                      {
+                        "Ref": "NginxTargetGroup6C5FCDE3"
+                      }
+                    ],
+                    "vpcZoneIdentifier": [
+                      {
+                        "Ref": "NginxVpcPublicSubnet1SubnetFD3CAA71"
+                      },
+                      {
+                        "Ref": "NginxVpcPublicSubnet2Subnet070965F9"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_autoscaling.CfnAutoScalingGroup",
+                  "version": "2.41.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_autoscaling.AutoScalingGroup",
+              "version": "2.41.0"
+            }
+          },
           "NginxTargetGroup": {
             "id": "NginxTargetGroup",
             "path": "NginxProxyStack/NginxTargetGroup",
@@ -784,7 +933,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
                   "aws:cdk:cloudformation:props": {
-                    "healthCheckPath": "/",
+                    "healthCheckPath": "/health",
                     "matcher": {
                       "httpCode": "200-399"
                     },
@@ -794,13 +943,6 @@
                       {
                         "key": "stickiness.enabled",
                         "value": "false"
-                      }
-                    ],
-                    "targets": [
-                      {
-                        "id": {
-                          "Ref": "NginxInstance1675945E77560d183f7de7d0"
-                        }
                       }
                     ],
                     "targetType": "instance",
@@ -817,121 +959,6 @@
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
-              "version": "2.41.0"
-            }
-          },
-          "NginxInstance": {
-            "id": "NginxInstance",
-            "path": "NginxProxyStack/NginxInstance",
-            "children": {
-              "InstanceRole": {
-                "id": "InstanceRole",
-                "path": "NginxProxyStack/NginxInstance/InstanceRole",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "NginxProxyStack/NginxInstance/InstanceRole/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
-                      "aws:cdk:cloudformation:props": {
-                        "assumeRolePolicyDocument": {
-                          "Statement": [
-                            {
-                              "Action": "sts:AssumeRole",
-                              "Effect": "Allow",
-                              "Principal": {
-                                "Service": "ec2.amazonaws.com"
-                              }
-                            }
-                          ],
-                          "Version": "2012-10-17"
-                        },
-                        "tags": [
-                          {
-                            "key": "Name",
-                            "value": "NginxProxyStack/NginxInstance"
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                      "version": "2.41.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.Role",
-                  "version": "2.41.0"
-                }
-              },
-              "InstanceProfile": {
-                "id": "InstanceProfile",
-                "path": "NginxProxyStack/NginxInstance/InstanceProfile",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
-                  "aws:cdk:cloudformation:props": {
-                    "roles": [
-                      {
-                        "Ref": "NginxInstanceInstanceRole65BF5669"
-                      }
-                    ]
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
-                  "version": "2.41.0"
-                }
-              },
-              "Resource": {
-                "id": "Resource",
-                "path": "NginxProxyStack/NginxInstance/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
-                  "aws:cdk:cloudformation:props": {
-                    "availabilityZone": {
-                      "Fn::Select": [
-                        0,
-                        {
-                          "Fn::GetAZs": ""
-                        }
-                      ]
-                    },
-                    "iamInstanceProfile": {
-                      "Ref": "NginxInstanceInstanceProfile9F91A2EA"
-                    },
-                    "imageId": "ami-0672fd5b9210aa093",
-                    "instanceType": "t2.micro",
-                    "securityGroupIds": [
-                      {
-                        "Fn::GetAtt": [
-                          "NginxSecurityGroupFD5E8C12",
-                          "GroupId"
-                        ]
-                      }
-                    ],
-                    "subnetId": {
-                      "Ref": "NginxVpcPublicSubnet1SubnetFD3CAA71"
-                    },
-                    "tags": [
-                      {
-                        "key": "Name",
-                        "value": "NginxProxyStack/NginxInstance"
-                      }
-                    ],
-                    "userData": {
-                      "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    server_name _;\n\n    # For the main website\n    location / {\n        proxy_pass https://www.bim.com.sg;\n        proxy_set_header Host www.bim.com.sg;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    # For Next.js static files in jobs section\n    location /_next/ {\n        proxy_pass https://jobs.bimeco.io/_next/;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    # For the jobs section\n    location /career {\n        # Rewrite /jobs to /career\n        proxy_pass https://jobs.bimeco.io;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    # error handling\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\n\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
-                  "version": "2.41.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_ec2.Instance",
               "version": "2.41.0"
             }
           },

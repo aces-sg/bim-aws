@@ -367,7 +367,7 @@
      },
      {
       "CidrIp": "0.0.0.0/0",
-      "Description": "Allow from anyone on port 443",
+      "Description": "Allow HTTPS traffic",
       "FromPort": 443,
       "IpProtocol": "tcp",
       "ToPort": 443
@@ -384,7 +384,7 @@
   "NginxSecurityGroupFD5E8C12": {
    "Type": "AWS::EC2::SecurityGroup",
    "Properties": {
-    "GroupDescription": "Security group for Nginx instance",
+    "GroupDescription": "Security group for Nginx instances",
     "SecurityGroupEgress": [
      {
       "CidrIp": "0.0.0.0/0",
@@ -412,6 +412,30 @@
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStack/NginxSecurityGroup/Resource"
+   }
+  },
+  "NginxSecurityGroupfromNginxProxyStackAlbSecurityGroup8F613DE38004C56EA1": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "FromPort": 80,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "NginxSecurityGroupFD5E8C12",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "AlbSecurityGroup86A59E99",
+      "GroupId"
+     ]
+    },
+    "ToPort": 80
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxSecurityGroup/from NginxProxyStackAlbSecurityGroup8F613DE3:80"
    }
   },
   "NginxAlb10923154": {
@@ -513,10 +537,105 @@
     "aws:cdk:path": "NginxProxyStack/NginxCertificate/Resource"
    }
   },
+  "NginxLaunchTemplate4364E9F8": {
+   "Type": "AWS::EC2::LaunchTemplate",
+   "Properties": {
+    "LaunchTemplateData": {
+     "ImageId": "ami-0672fd5b9210aa093",
+     "InstanceType": "t2.micro",
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "NginxSecurityGroupFD5E8C12",
+        "GroupId"
+       ]
+      }
+     ],
+     "TagSpecifications": [
+      {
+       "ResourceType": "instance",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "NginxProxyStack/NginxLaunchTemplate"
+        }
+       ]
+      },
+      {
+       "ResourceType": "volume",
+       "Tags": [
+        {
+         "Key": "Name",
+         "Value": "NginxProxyStack/NginxLaunchTemplate"
+        }
+       ]
+      }
+     ],
+     "UserData": {
+      "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    server_name _;\n\n    location / {\n        proxy_pass https://www.bim.com.sg;\n        proxy_set_header Host www.bim.com.sg;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /_next/ {\n        proxy_pass https://jobs.bimeco.io/_next/;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /career {\n        proxy_pass https://jobs.bimeco.io;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location /health {\n        access_log off;\n        return 200 'Healthy';\n    }\n\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
+     }
+    },
+    "TagSpecifications": [
+     {
+      "ResourceType": "launch-template",
+      "Tags": [
+       {
+        "Key": "Name",
+        "Value": "NginxProxyStack/NginxLaunchTemplate"
+       }
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxLaunchTemplate/Resource"
+   }
+  },
+  "NginxAsgASG6E998B71": {
+   "Type": "AWS::AutoScaling::AutoScalingGroup",
+   "Properties": {
+    "MaxSize": "4",
+    "MinSize": "3",
+    "HealthCheckGracePeriod": 120,
+    "HealthCheckType": "ELB",
+    "LaunchTemplate": {
+     "LaunchTemplateId": {
+      "Ref": "NginxLaunchTemplate4364E9F8"
+     },
+     "Version": {
+      "Fn::GetAtt": [
+       "NginxLaunchTemplate4364E9F8",
+       "LatestVersionNumber"
+      ]
+     }
+    },
+    "TargetGroupARNs": [
+     {
+      "Ref": "NginxTargetGroup6C5FCDE3"
+     }
+    ],
+    "VPCZoneIdentifier": [
+     {
+      "Ref": "NginxVpcPublicSubnet1SubnetFD3CAA71"
+     },
+     {
+      "Ref": "NginxVpcPublicSubnet2Subnet070965F9"
+     }
+    ]
+   },
+   "UpdatePolicy": {
+    "AutoScalingScheduledAction": {
+     "IgnoreUnmodifiedGroupSizeProperties": true
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStack/NginxAsg/ASG"
+   }
+  },
   "NginxTargetGroup6C5FCDE3": {
    "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
    "Properties": {
-    "HealthCheckPath": "/",
+    "HealthCheckPath": "/health",
     "Matcher": {
      "HttpCode": "200-399"
     },
@@ -528,13 +647,6 @@
       "Value": "false"
      }
     ],
-    "Targets": [
-     {
-      "Id": {
-       "Ref": "NginxInstance1675945E77560d183f7de7d0"
-      }
-     }
-    ],
     "TargetType": "instance",
     "VpcId": {
      "Ref": "NginxVpcFE1B165E"
@@ -544,93 +656,10 @@
     "aws:cdk:path": "NginxProxyStack/NginxTargetGroup/Resource"
    }
   },
-  "NginxInstanceInstanceRole65BF5669": {
-   "Type": "AWS::IAM::Role",
-   "Properties": {
-    "AssumeRolePolicyDocument": {
-     "Statement": [
-      {
-       "Action": "sts:AssumeRole",
-       "Effect": "Allow",
-       "Principal": {
-        "Service": "ec2.amazonaws.com"
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "Tags": [
-     {
-      "Key": "Name",
-      "Value": "NginxProxyStack/NginxInstance"
-     }
-    ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxInstance/InstanceRole/Resource"
-   }
-  },
-  "NginxInstanceInstanceProfile9F91A2EA": {
-   "Type": "AWS::IAM::InstanceProfile",
-   "Properties": {
-    "Roles": [
-     {
-      "Ref": "NginxInstanceInstanceRole65BF5669"
-     }
-    ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxInstance/InstanceProfile"
-   }
-  },
-  "NginxInstance1675945E77560d183f7de7d0": {
-   "Type": "AWS::EC2::Instance",
-   "Properties": {
-    "AvailabilityZone": {
-     "Fn::Select": [
-      0,
-      {
-       "Fn::GetAZs": ""
-      }
-     ]
-    },
-    "IamInstanceProfile": {
-     "Ref": "NginxInstanceInstanceProfile9F91A2EA"
-    },
-    "ImageId": "ami-0672fd5b9210aa093",
-    "InstanceType": "t2.micro",
-    "SecurityGroupIds": [
-     {
-      "Fn::GetAtt": [
-       "NginxSecurityGroupFD5E8C12",
-       "GroupId"
-      ]
-     }
-    ],
-    "SubnetId": {
-     "Ref": "NginxVpcPublicSubnet1SubnetFD3CAA71"
-    },
-    "Tags": [
-     {
-      "Key": "Name",
-      "Value": "NginxProxyStack/NginxInstance"
-     }
-    ],
-    "UserData": {
-     "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    server_name _;\n\n    # For the main website\n    location / {\n        proxy_pass https://www.bim.com.sg;\n        proxy_set_header Host www.bim.com.sg;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    # For Next.js static files in jobs section\n    location /_next/ {\n        proxy_pass https://jobs.bimeco.io/_next/;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    # For the jobs section\n    location /career {\n        # Rewrite /jobs to /career\n        proxy_pass https://jobs.bimeco.io;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    # error handling\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\n\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
-    }
-   },
-   "DependsOn": [
-    "NginxInstanceInstanceRole65BF5669"
-   ],
-   "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxInstance/Resource"
-   }
-  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WRwW7CMAyGn2X3kAHaYdeOA0JCWtUirpMbDDOkSZU4Rajquy+l7VpOsT//sf0na/mxkss3uPuFOt0WmgrZ5AzqJiL6aVCtZXOslNiczTHdiDQUmlQeCoPcsSnKbGA8QKFx4hNLvLeKgMmaf7FIHdXAOPXYGUYX422kd3gMQ4cs4bjWb4mGRY4qOOLH1tlQPce9gJ3xDEZh37KPW4EaPJPSFk4F6MjIXOroLqmqaOm52j7Wvp41dN3ll3yuI89oBs0Yz+oHcJfoYtxulrYitmI6d0IswcAFnWw2E+v0s7QVBKVsMts/63iOrlJnz6SxbUWG3gbXe/4OXIX+UwbaCmNPKK/+vV59ymX88KsnWrhgmEqUWX/+AUL3RaUMAgAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/32SQY+CMBCFf8vea1fNHvbqejAmJhohXjdDHbFaWtJOMYbw33dAFHYPe2LeNy+vr8Bcfszk9A1uYaKO14nRmawTAnUVjL5rVHNZH0ollid72C3FLmZGqyRmFqllw7R3kTCFzODAB7YIwSkNpJ19mcXO6woIh4y1JfQ8r5je4N4f2qsFca1zgZZEgip6TfeVd7HsjvsXrG3uMQSxgWjVOcWiNBzZ2n6TRqCBQFoZB8cMDFilbV7xG1iUJV+7q7/h3Ve3Q99FjPXYpwOh7T3PebRPwed802fhkWwER5E+tUYswEKOXtbLgbX+kWwERHJBgeG23JVF8hCv9L+sacQeg4tedWHbSGV8fMWeNsK6I8pLeK9mn3LKf8glaD3x0ZIuUO4fzx+a88zoPQIAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStack/CDKMetadata/Default"

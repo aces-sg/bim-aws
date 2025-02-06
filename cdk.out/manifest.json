@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-ap-southeast-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-ap-southeast-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/dfde76898459467904f437770e2d5b41656c679ee882f5c8cd2aca25871862a8.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/d9915012907a3a9de576f01517e0111fa6a6eeeaf518f7d72d94095249f4dc22.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -153,6 +153,12 @@
             "data": "NginxSecurityGroupFD5E8C12"
           }
         ],
+        "/NginxProxyStack/NginxSecurityGroup/from NginxProxyStackAlbSecurityGroup8F613DE3:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxSecurityGroupfromNginxProxyStackAlbSecurityGroup8F613DE38004C56EA1"
+          }
+        ],
         "/NginxProxyStack/NginxAlb/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -177,28 +183,22 @@
             "data": "NginxCertificate26E222C0"
           }
         ],
+        "/NginxProxyStack/NginxLaunchTemplate/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxLaunchTemplate4364E9F8"
+          }
+        ],
+        "/NginxProxyStack/NginxAsg/ASG": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxAsgASG6E998B71"
+          }
+        ],
         "/NginxProxyStack/NginxTargetGroup/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "NginxTargetGroup6C5FCDE3"
-          }
-        ],
-        "/NginxProxyStack/NginxInstance/InstanceRole/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NginxInstanceInstanceRole65BF5669"
-          }
-        ],
-        "/NginxProxyStack/NginxInstance/InstanceProfile": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NginxInstanceInstanceProfile9F91A2EA"
-          }
-        ],
-        "/NginxProxyStack/NginxInstance/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NginxInstance1675945E77560d183f7de7d0"
           }
         ],
         "/NginxProxyStack/LoadBalancerDNS": [
