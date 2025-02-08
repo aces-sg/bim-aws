@@ -61,7 +61,7 @@ export class NginxProxyStack extends cdk.Stack {
 
     // Create ACM certificate
     const certificate = new acm.Certificate(this, "NginxCertificate", {
-      domainName: "staging.bim.com.sg",
+      domainName: "*.bim.com.sg",
       validation: acm.CertificateValidation.fromDns(),
     });
 

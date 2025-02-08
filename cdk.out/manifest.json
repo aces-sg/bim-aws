@@ -23,11 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-ap-southeast-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-ap-southeast-1",
-<<<<<<< HEAD
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/d73c151ea6eca961b35e71dd8a6db0c6eb8e57f65455231e765371e2007a56f1.json",
-=======
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/d9915012907a3a9de576f01517e0111fa6a6eeeaf518f7d72d94095249f4dc22.json",
->>>>>>> upwork-latest
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/edc18e9a40ebda961c0d255daaac4731da66bcd8e6345ba189dbb54d0b531a0f.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -157,41 +153,10 @@
             "data": "NginxSecurityGroupFD5E8C12"
           }
         ],
-<<<<<<< HEAD
-        "/NginxProxyStack/NginxAlb/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NginxAlb10923154"
-          }
-        ],
-        "/NginxProxyStack/NginxAlb/HttpsListener/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NginxAlbHttpsListenerDE052181"
-          }
-        ],
-        "/NginxProxyStack/NginxAlb/HttpsListener/AllowBimecoDomainRule/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NginxAlbHttpsListenerAllowBimecoDomainRule70C1E4E9"
-          }
-        ],
-        "/NginxProxyStack/NginxCertificate/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NginxCertificate26E222C0"
-          }
-        ],
-        "/NginxProxyStack/NginxTargetGroup/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "NginxTargetGroup6C5FCDE3"
-=======
         "/NginxProxyStack/NginxSecurityGroup/from NginxProxyStackAlbSecurityGroup8F613DE3:80": [
           {
             "type": "aws:cdk:logicalId",
             "data": "NginxSecurityGroupfromNginxProxyStackAlbSecurityGroup8F613DE38004C56EA1"
->>>>>>> upwork-latest
           }
         ],
         "/NginxProxyStack/NginxAlb/Resource": [
@@ -212,11 +177,6 @@
             "data": "NginxAlbHttpsListenerDE052181"
           }
         ],
-<<<<<<< HEAD
-        "/NginxProxyStack/LoadBalancerDNS": [
-          {
-            "type": "aws:cdk:logicalId",
-=======
         "/NginxProxyStack/NginxCertificate/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -244,7 +204,6 @@
         "/NginxProxyStack/LoadBalancerDNS": [
           {
             "type": "aws:cdk:logicalId",
->>>>>>> upwork-latest
             "data": "LoadBalancerDNS"
           }
         ],

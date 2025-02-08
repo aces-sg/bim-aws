@@ -1,11 +1,7 @@
 {
   "version": "21.0.0",
   "files": {
-<<<<<<< HEAD
-    "d73c151ea6eca961b35e71dd8a6db0c6eb8e57f65455231e765371e2007a56f1": {
-=======
-    "d9915012907a3a9de576f01517e0111fa6a6eeeaf518f7d72d94095249f4dc22": {
->>>>>>> upwork-latest
+    "edc18e9a40ebda961c0d255daaac4731da66bcd8e6345ba189dbb54d0b531a0f": {
       "source": {
         "path": "NginxProxyStack.template.json",
         "packaging": "file"
@@ -13,11 +9,7 @@
       "destinations": {
         "current_account-ap-southeast-1": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1",
-<<<<<<< HEAD
-          "objectKey": "d73c151ea6eca961b35e71dd8a6db0c6eb8e57f65455231e765371e2007a56f1.json",
-=======
-          "objectKey": "d9915012907a3a9de576f01517e0111fa6a6eeeaf518f7d72d94095249f4dc22.json",
->>>>>>> upwork-latest
+          "objectKey": "edc18e9a40ebda961c0d255daaac4731da66bcd8e6345ba189dbb54d0b531a0f.json",
           "region": "ap-southeast-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-ap-southeast-1"
         }

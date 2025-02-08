@@ -545,6 +545,13 @@
                       {
                         "cidrIp": "0.0.0.0/0",
                         "ipProtocol": "tcp",
+                        "fromPort": 80,
+                        "toPort": 80,
+                        "description": "Allow HTTP traffic"
+                      },
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
                         "fromPort": 443,
                         "toPort": 443,
                         "description": "Allow HTTPS traffic"
@@ -576,11 +583,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
                   "aws:cdk:cloudformation:props": {
-<<<<<<< HEAD
-                    "groupDescription": "Security group for Nginx instance",
-=======
                     "groupDescription": "Security group for Nginx instances",
->>>>>>> upwork-latest
                     "securityGroupEgress": [
                       {
                         "cidrIp": "0.0.0.0/0",
@@ -611,8 +614,6 @@
                   "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
                   "version": "2.41.0"
                 }
-<<<<<<< HEAD
-=======
               },
               "from NginxProxyStackAlbSecurityGroup8F613DE3:80": {
                 "id": "from NginxProxyStackAlbSecurityGroup8F613DE3:80",
@@ -642,222 +643,10 @@
                   "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
                   "version": "2.41.0"
                 }
->>>>>>> upwork-latest
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
-<<<<<<< HEAD
-              "version": "2.41.0"
-            }
-          },
-          "NginxAlb": {
-            "id": "NginxAlb",
-            "path": "NginxProxyStack/NginxAlb",
-            "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "NginxProxyStack/NginxAlb/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
-                  "aws:cdk:cloudformation:props": {
-                    "loadBalancerAttributes": [
-                      {
-                        "key": "deletion_protection.enabled",
-                        "value": "false"
-                      }
-                    ],
-                    "scheme": "internet-facing",
-                    "securityGroups": [
-                      {
-                        "Fn::GetAtt": [
-                          "AlbSecurityGroup86A59E99",
-                          "GroupId"
-                        ]
-                      }
-                    ],
-                    "subnets": [
-                      {
-                        "Ref": "NginxVpcPublicSubnet1SubnetFD3CAA71"
-                      },
-                      {
-                        "Ref": "NginxVpcPublicSubnet2Subnet070965F9"
-                      }
-                    ],
-                    "type": "application"
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnLoadBalancer",
-                  "version": "2.41.0"
-                }
-              },
-              "HttpsListener": {
-                "id": "HttpsListener",
-                "path": "NginxProxyStack/NginxAlb/HttpsListener",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "NginxProxyStack/NginxAlb/HttpsListener/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::Listener",
-                      "aws:cdk:cloudformation:props": {
-                        "defaultActions": [
-                          {
-                            "type": "fixed-response",
-                            "fixedResponseConfig": {
-                              "statusCode": "403",
-                              "contentType": "text/plain",
-                              "messageBody": "Forbidden"
-                            }
-                          }
-                        ],
-                        "loadBalancerArn": {
-                          "Ref": "NginxAlb10923154"
-                        },
-                        "certificates": [
-                          {
-                            "certificateArn": {
-                              "Ref": "NginxCertificate26E222C0"
-                            }
-                          }
-                        ],
-                        "port": 443,
-                        "protocol": "HTTPS"
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListener",
-                      "version": "2.41.0"
-                    }
-                  },
-                  "AllowBimecoDomainRule": {
-                    "id": "AllowBimecoDomainRule",
-                    "path": "NginxProxyStack/NginxAlb/HttpsListener/AllowBimecoDomainRule",
-                    "children": {
-                      "Resource": {
-                        "id": "Resource",
-                        "path": "NginxProxyStack/NginxAlb/HttpsListener/AllowBimecoDomainRule/Resource",
-                        "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::ListenerRule",
-                          "aws:cdk:cloudformation:props": {
-                            "actions": [
-                              {
-                                "type": "forward",
-                                "targetGroupArn": {
-                                  "Ref": "NginxTargetGroup6C5FCDE3"
-                                }
-                              }
-                            ],
-                            "conditions": [
-                              {
-                                "field": "host-header",
-                                "hostHeaderConfig": {
-                                  "values": [
-                                    "www.bim.com.sg"
-                                  ]
-                                }
-                              }
-                            ],
-                            "listenerArn": {
-                              "Ref": "NginxAlbHttpsListenerDE052181"
-                            },
-                            "priority": 3
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListenerRule",
-                          "version": "2.41.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListenerRule",
-                      "version": "2.41.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListener",
-                  "version": "2.41.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationLoadBalancer",
-              "version": "2.41.0"
-            }
-          },
-          "NginxCertificate": {
-            "id": "NginxCertificate",
-            "path": "NginxProxyStack/NginxCertificate",
-            "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "NginxProxyStack/NginxCertificate/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::CertificateManager::Certificate",
-                  "aws:cdk:cloudformation:props": {
-                    "domainName": "www.bim.com.sg",
-                    "validationMethod": "DNS"
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_certificatemanager.CfnCertificate",
-                  "version": "2.41.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_certificatemanager.Certificate",
-              "version": "2.41.0"
-            }
-          },
-          "NginxTargetGroup": {
-            "id": "NginxTargetGroup",
-            "path": "NginxProxyStack/NginxTargetGroup",
-            "children": {
-              "Resource": {
-                "id": "Resource",
-                "path": "NginxProxyStack/NginxTargetGroup/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
-                  "aws:cdk:cloudformation:props": {
-                    "healthCheckPath": "/",
-                    "matcher": {
-                      "httpCode": "200-399"
-                    },
-                    "port": 80,
-                    "protocol": "HTTP",
-                    "targetGroupAttributes": [
-                      {
-                        "key": "stickiness.enabled",
-                        "value": "false"
-                      }
-                    ],
-                    "targets": [
-                      {
-                        "id": {
-                          "Ref": "NginxInstance1675945E"
-                        }
-                      }
-                    ],
-                    "targetType": "instance",
-                    "vpcId": {
-                      "Ref": "NginxVpcFE1B165E"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
-                  "version": "2.41.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
-=======
->>>>>>> upwork-latest
               "version": "2.41.0"
             }
           },
@@ -999,7 +788,7 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::CertificateManager::Certificate",
                   "aws:cdk:cloudformation:props": {
-                    "domainName": "staging.bim.com.sg",
+                    "domainName": "*.bim.com.sg",
                     "validationMethod": "DNS"
                   }
                 },
@@ -1056,7 +845,7 @@
                         }
                       ],
                       "userData": {
-                        "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    server_name _;\n\n    location / {\n        proxy_pass https://www.bim.com.sg;\n        proxy_set_header Host www.bim.com.sg;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /_next/ {\n        proxy_pass https://jobs.bimeco.io/_next/;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /career {\n        proxy_pass https://jobs.bimeco.io;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location /health {\n        access_log off;\n        return 200 'Healthy';\n    }\n\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
+                        "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\nserver {\n    listen 80;\n    listen [::]:80;\n    server_name _;\n\n    location / {\n        proxy_pass https://www.bim.com.sg;\n        proxy_set_header Host www.bim.com.sg;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /_next/ {\n        proxy_pass https://jobs.bimeco.io/_next/;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /career {\n        proxy_pass https://jobs.bimeco.io;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location /health {\n        access_log off;\n        return 200 'Healthy';\n    }\n\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
                       }
                     },
                     "tagSpecifications": [
@@ -1093,23 +882,6 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::AutoScaling::AutoScalingGroup",
                   "aws:cdk:cloudformation:props": {
-<<<<<<< HEAD
-                    "availabilityZone": {
-                      "Fn::Select": [
-                        0,
-                        {
-                          "Fn::GetAZs": ""
-                        }
-                      ]
-                    },
-                    "iamInstanceProfile": {
-                      "Ref": "NginxInstanceInstanceProfile9F91A2EA"
-                    },
-                    "imageId": "ami-0672fd5b9210aa093",
-                    "instanceType": "t2.micro",
-                    "securityGroupIds": [
-                      {
-=======
                     "maxSize": "4",
                     "minSize": "3",
                     "healthCheckGracePeriod": 120,
@@ -1119,7 +891,6 @@
                         "Ref": "NginxLaunchTemplate4364E9F8"
                       },
                       "version": {
->>>>>>> upwork-latest
                         "Fn::GetAtt": [
                           "NginxLaunchTemplate4364E9F8",
                           "LatestVersionNumber"
@@ -1131,10 +902,6 @@
                         "Ref": "NginxTargetGroup6C5FCDE3"
                       }
                     ],
-<<<<<<< HEAD
-                    "userData": {
-                      "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\nserver {\n    listen 80;\n    listen [::]:80;\n    server_name _;\n\n    location / {\n        proxy_pass https://www.bim.com.sg;\n        proxy_set_header Host www.bim.com.sg;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_ssl_server_name on;\n    }\n\n        # For Next.js static files in jobs section\n    location /_next/ {\n        proxy_pass https://jobs.bimeco.io/_next/;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    # For the jobs section\n    location /jobs {\n        # Rewrite /jobs to /career\n        rewrite ^/jobs(/.*)?\\$ /career\\$1 break;\n        proxy_pass https://jobs.bimeco.io;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    # error handling\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\n\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
-=======
                     "vpcZoneIdentifier": [
                       {
                         "Ref": "NginxVpcPublicSubnet1SubnetFD3CAA71"
@@ -1181,7 +948,6 @@
                     "targetType": "instance",
                     "vpcId": {
                       "Ref": "NginxVpcFE1B165E"
->>>>>>> upwork-latest
                     }
                   }
                 },
