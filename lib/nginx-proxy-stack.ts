@@ -52,6 +52,13 @@ export class NginxProxyStack extends cdk.Stack {
       "Allow HTTP traffic from ALB"
     );
 
+    // Allow SSH Access
+    ec2SecurityGroup.addIngressRule(
+      ec2.Peer.anyIpv4(), // Replace with your IP if needed
+      ec2.Port.tcp(22),
+      "Allow SSH access"
+    );
+
     // Create ALB
     const alb = new elbv2.ApplicationLoadBalancer(this, "NginxAlb", {
       vpc,
@@ -132,6 +139,7 @@ EOF'`,
         ec2.InstanceClass.T2,
         ec2.InstanceSize.MICRO
       ),
+      keyName: "default-bim",
       securityGroup: ec2SecurityGroup,
       userData,
     });
@@ -147,7 +155,7 @@ EOF'`,
         maxCapacity: 4, // Can scale up if needed
         launchTemplate,
         healthCheck: autoscaling.HealthCheck.elb({
-          grace: cdk.Duration.seconds(120),
+          grace: cdk.Duration.minutes(30),
         }),
       }
     );

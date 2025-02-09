@@ -404,6 +404,13 @@
        ]
       },
       "ToPort": 80
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow SSH access",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
      }
     ],
     "VpcId": {
@@ -543,6 +550,7 @@
     "LaunchTemplateData": {
      "ImageId": "ami-0672fd5b9210aa093",
      "InstanceType": "t2.micro",
+     "KeyName": "default-bim",
      "SecurityGroupIds": [
       {
        "Fn::GetAtt": [
@@ -596,7 +604,7 @@
    "Properties": {
     "MaxSize": "4",
     "MinSize": "3",
-    "HealthCheckGracePeriod": 120,
+    "HealthCheckGracePeriod": 1800,
     "HealthCheckType": "ELB",
     "LaunchTemplate": {
      "LaunchTemplateId": {
@@ -659,7 +667,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/32SQY+CMBCFf8vea1fNHvbqejAmJhohXjdDHbFaWtJOMYbw33dAFHYPe2LeNy+vr8Bcfszk9A1uYaKO14nRmawTAnUVjL5rVHNZH0ollid72C3FLmZGqyRmFqllw7R3kTCFzODAB7YIwSkNpJ19mcXO6woIh4y1JfQ8r5je4N4f2qsFca1zgZZEgip6TfeVd7HsjvsXrG3uMQSxgWjVOcWiNBzZ2n6TRqCBQFoZB8cMDFilbV7xG1iUJV+7q7/h3Ve3Q99FjPXYpwOh7T3PebRPwed802fhkWwER5E+tUYswEKOXtbLgbX+kWwERHJBgeG23JVF8hCv9L+sacQeg4tedWHbSGV8fMWeNsK6I8pLeK9mn3LKf8glaD3x0ZIuUO4fzx+a88zoPQIAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/32RQW/CMAyFfwv3kLFqf4BxQEhIQ4C4Tq7rFUPqVIkDQlX/+0TpaLfDTvH7/PT8pGT27dXOJnCNUyzOU8e5bXYKeDZwjZ8NYWabQ41m8SWHzcJsUu4YdykX0jsbpq1PSnvIHQ18YPMYPTIoe3mazSbwBZSGjJUoBSFdgtIVbv3RXs1VAY8ViZodYQqst2Xwqe7O/QtWUgaK0awhCR73VNUOtKv5m7SGHERldB6KHBwIspSXzDbzunaMXf21h+K921HoIsZ67OOoJL3nZx7t9xBK0mfhkWwNUlD+uhupAoGSgm0WA7v7R7I1kNRHBMdS2mae1O8e4pn+l7Wt2VL0KWAX9pG0To9f7GlrxBdkT/HlkmV2ZmeTU2SehiTKFdnt4/0Girg7Gz0CAAA="
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStack/CDKMetadata/Default"

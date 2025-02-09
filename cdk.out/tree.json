@@ -603,6 +603,13 @@
                         "fromPort": 80,
                         "toPort": 80,
                         "description": "Allow HTTP traffic from ALB"
+                      },
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 22,
+                        "toPort": 22,
+                        "description": "Allow SSH access"
                       }
                     ],
                     "vpcId": {
@@ -816,6 +823,7 @@
                     "launchTemplateData": {
                       "imageId": "ami-0672fd5b9210aa093",
                       "instanceType": "t2.micro",
+                      "keyName": "default-bim",
                       "securityGroupIds": [
                         {
                           "Fn::GetAtt": [
@@ -884,7 +892,7 @@
                   "aws:cdk:cloudformation:props": {
                     "maxSize": "4",
                     "minSize": "3",
-                    "healthCheckGracePeriod": 120,
+                    "healthCheckGracePeriod": 1800,
                     "healthCheckType": "ELB",
                     "launchTemplate": {
                       "launchTemplateId": {
