@@ -4,6 +4,7 @@ import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import * as autoscaling from "aws-cdk-lib/aws-autoscaling";
 import * as acm from "aws-cdk-lib/aws-certificatemanager";
+import { readFileSync } from "fs";
 
 export class NginxProxyStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
