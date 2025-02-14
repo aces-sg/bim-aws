@@ -52,6 +52,13 @@ export class NginxProxyStack extends cdk.Stack {
       "Allow HTTP traffic from ALB"
     );
 
+    // Allow SSH Access
+    ec2SecurityGroup.addIngressRule(
+      ec2.Peer.anyIpv4(), // Replace with your IP if needed
+      ec2.Port.tcp(22),
+      "Allow SSH access"
+    );
+
     // Create ALB
     const alb = new elbv2.ApplicationLoadBalancer(this, "NginxAlb", {
       vpc,
@@ -61,7 +68,7 @@ export class NginxProxyStack extends cdk.Stack {
 
     // Create ACM certificate
     const certificate = new acm.Certificate(this, "NginxCertificate", {
-      domainName: "staging.bim.com.sg",
+      domainName: "*.bim.com.sg",
       validation: acm.CertificateValidation.fromDns(),
     });
 
@@ -128,41 +135,57 @@ EOF'`,
       machineImage: ec2.MachineImage.genericLinux({
         "ap-southeast-1": "ami-0672fd5b9210aa093",
       }),
-      instanceType: ec2.InstanceType.of(ec2.InstanceClass.T2, ec2.InstanceSize.MICRO),
+      instanceType: ec2.InstanceType.of(
+        ec2.InstanceClass.T2,
+        ec2.InstanceSize.MICRO
+      ),
+      keyName: "default-bim",
       securityGroup: ec2SecurityGroup,
       userData,
     });
 
     // Create an Auto Scaling Group
-    const autoScalingGroup = new autoscaling.AutoScalingGroup(this, "NginxAsg", {
-      vpc,
-      vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
-      minCapacity: 3, // Ensures at least 3 instances
-      maxCapacity: 4, // Can scale up if needed
-      launchTemplate,
-      healthCheck: autoscaling.HealthCheck.elb({ grace: cdk.Duration.seconds(120) }),
-    });
+    const autoScalingGroup = new autoscaling.AutoScalingGroup(
+      this,
+      "NginxAsg",
+      {
+        vpc,
+        vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+        minCapacity: 3, // Ensures at least 3 instances
+        maxCapacity: 4, // Can scale up if needed
+        launchTemplate,
+        healthCheck: autoscaling.HealthCheck.elb({
+          grace: cdk.Duration.minutes(30),
+        }),
+      }
+    );
 
     // Create target group for ALB
-    const targetGroup = new elbv2.ApplicationTargetGroup(this, "NginxTargetGroup", {
-      vpc,
-      port: 80,
-      protocol: elbv2.ApplicationProtocol.HTTP,
-      targets: [autoScalingGroup],
-      targetType: elbv2.TargetType.INSTANCE,
-      healthCheck: {
-        path: "/health",
-        healthyHttpCodes: "200-399",
-      },
-    });    
-    
+    const targetGroup = new elbv2.ApplicationTargetGroup(
+      this,
+      "NginxTargetGroup",
+      {
+        vpc,
+        port: 80,
+        protocol: elbv2.ApplicationProtocol.HTTP,
+        targets: [autoScalingGroup],
+        targetType: elbv2.TargetType.INSTANCE,
+        healthCheck: {
+          path: "/health",
+          healthyHttpCodes: "200-399",
+        },
+      }
+    );
+
     // Create ALB listeners
     alb.addRedirect(); // Redirect HTTP to HTTPS
 
     alb.addListener("HttpsListener", {
       port: 443,
       defaultAction: elbv2.ListenerAction.forward([targetGroup]),
-      certificates: [elbv2.ListenerCertificate.fromCertificateManager(certificate)],
+      certificates: [
+        elbv2.ListenerCertificate.fromCertificateManager(certificate),
+      ],
     });
 
     // Output the ALB DNS name
