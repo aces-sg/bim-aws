@@ -10,12 +10,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc"
+      "Value": "NginxProxyStackTwo/NginxVpc"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/Resource"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/Resource"
    }
   },
   "NginxVpcPublicSubnet1SubnetFD3CAA71": {
@@ -45,12 +45,12 @@
      },
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/PublicSubnet1"
+      "Value": "NginxProxyStackTwo/NginxVpc/PublicSubnet1"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet1/Subnet"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/PublicSubnet1/Subnet"
    }
   },
   "NginxVpcPublicSubnet1RouteTableDE29045F": {
@@ -62,12 +62,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/PublicSubnet1"
+      "Value": "NginxProxyStackTwo/NginxVpc/PublicSubnet1"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet1/RouteTable"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/PublicSubnet1/RouteTable"
    }
   },
   "NginxVpcPublicSubnet1RouteTableAssociation8988997E": {
@@ -81,7 +81,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet1/RouteTableAssociation"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/PublicSubnet1/RouteTableAssociation"
    }
   },
   "NginxVpcPublicSubnet1DefaultRoute8E2C4B50": {
@@ -99,7 +99,7 @@
     "NginxVpcVPCGWA22A08F1"
    ],
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet1/DefaultRoute"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/PublicSubnet1/DefaultRoute"
    }
   },
   "NginxVpcPublicSubnet2Subnet070965F9": {
@@ -129,12 +129,12 @@
      },
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/PublicSubnet2"
+      "Value": "NginxProxyStackTwo/NginxVpc/PublicSubnet2"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet2/Subnet"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/PublicSubnet2/Subnet"
    }
   },
   "NginxVpcPublicSubnet2RouteTableD2BFAC61": {
@@ -146,12 +146,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/PublicSubnet2"
+      "Value": "NginxProxyStackTwo/NginxVpc/PublicSubnet2"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet2/RouteTable"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/PublicSubnet2/RouteTable"
    }
   },
   "NginxVpcPublicSubnet2RouteTableAssociationE6BE9BCB": {
@@ -165,7 +165,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet2/RouteTableAssociation"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/PublicSubnet2/RouteTableAssociation"
    }
   },
   "NginxVpcPublicSubnet2DefaultRouteFFF221F2": {
@@ -183,7 +183,7 @@
     "NginxVpcVPCGWA22A08F1"
    ],
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet2/DefaultRoute"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/PublicSubnet2/DefaultRoute"
    }
   },
   "NginxVpcIsolatedSubnet1Subnet9CA57C33": {
@@ -213,12 +213,12 @@
      },
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/IsolatedSubnet1"
+      "Value": "NginxProxyStackTwo/NginxVpc/IsolatedSubnet1"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/Subnet"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/IsolatedSubnet1/Subnet"
    }
   },
   "NginxVpcIsolatedSubnet1RouteTable7BA216E2": {
@@ -230,12 +230,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/IsolatedSubnet1"
+      "Value": "NginxProxyStackTwo/NginxVpc/IsolatedSubnet1"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/RouteTable"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/IsolatedSubnet1/RouteTable"
    }
   },
   "NginxVpcIsolatedSubnet1RouteTableAssociationB974B368": {
@@ -249,7 +249,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/RouteTableAssociation"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/IsolatedSubnet1/RouteTableAssociation"
    }
   },
   "NginxVpcIsolatedSubnet2SubnetB99DDB07": {
@@ -279,12 +279,12 @@
      },
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/IsolatedSubnet2"
+      "Value": "NginxProxyStackTwo/NginxVpc/IsolatedSubnet2"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet2/Subnet"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/IsolatedSubnet2/Subnet"
    }
   },
   "NginxVpcIsolatedSubnet2RouteTable5365FB87": {
@@ -296,12 +296,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/IsolatedSubnet2"
+      "Value": "NginxProxyStackTwo/NginxVpc/IsolatedSubnet2"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet2/RouteTable"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/IsolatedSubnet2/RouteTable"
    }
   },
   "NginxVpcIsolatedSubnet2RouteTableAssociationD8F91B56": {
@@ -315,7 +315,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet2/RouteTableAssociation"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/IsolatedSubnet2/RouteTableAssociation"
    }
   },
   "NginxVpcIGW5BF51E51": {
@@ -324,12 +324,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc"
+      "Value": "NginxProxyStackTwo/NginxVpc"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IGW"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/IGW"
    }
   },
   "NginxVpcVPCGWA22A08F1": {
@@ -343,7 +343,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/VPCGW"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxVpc/VPCGW"
    }
   },
   "AlbSecurityGroup86A59E99": {
@@ -378,7 +378,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/AlbSecurityGroup/Resource"
+    "aws:cdk:path": "NginxProxyStackTwo/AlbSecurityGroup/Resource"
    }
   },
   "NginxSecurityGroupFD5E8C12": {
@@ -404,6 +404,13 @@
        ]
       },
       "ToPort": 80
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow SSH access",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
      }
     ],
     "VpcId": {
@@ -411,10 +418,10 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxSecurityGroup/Resource"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxSecurityGroup/Resource"
    }
   },
-  "NginxSecurityGroupfromNginxProxyStackAlbSecurityGroup8F613DE38004C56EA1": {
+  "NginxSecurityGroupfromNginxProxyStackTwoAlbSecurityGroupE71E5E7E80A00C58C2": {
    "Type": "AWS::EC2::SecurityGroupIngress",
    "Properties": {
     "IpProtocol": "tcp",
@@ -435,7 +442,7 @@
     "ToPort": 80
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxSecurityGroup/from NginxProxyStackAlbSecurityGroup8F613DE3:80"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxSecurityGroup/from NginxProxyStackTwoAlbSecurityGroupE71E5E7E:80"
    }
   },
   "NginxAlb10923154": {
@@ -473,7 +480,7 @@
     "NginxVpcPublicSubnet2RouteTableAssociationE6BE9BCB"
    ],
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxAlb/Resource"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxAlb/Resource"
    }
   },
   "NginxAlbRedirect80To4438A980C0E": {
@@ -496,7 +503,7 @@
     "Protocol": "HTTP"
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxAlb/Redirect80To443/Resource"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxAlb/Redirect80To443/Resource"
    }
   },
   "NginxAlbHttpsListenerDE052181": {
@@ -524,17 +531,17 @@
     "Protocol": "HTTPS"
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxAlb/HttpsListener/Resource"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxAlb/HttpsListener/Resource"
    }
   },
   "NginxCertificate26E222C0": {
    "Type": "AWS::CertificateManager::Certificate",
    "Properties": {
-    "DomainName": "staging.bim.com.sg",
+    "DomainName": "*.bim.com.sg",
     "ValidationMethod": "DNS"
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxCertificate/Resource"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxCertificate/Resource"
    }
   },
   "NginxLaunchTemplate4364E9F8": {
@@ -543,6 +550,7 @@
     "LaunchTemplateData": {
      "ImageId": "ami-0672fd5b9210aa093",
      "InstanceType": "t2.micro",
+     "KeyName": "default-bim",
      "SecurityGroupIds": [
       {
        "Fn::GetAtt": [
@@ -557,7 +565,7 @@
        "Tags": [
         {
          "Key": "Name",
-         "Value": "NginxProxyStack/NginxLaunchTemplate"
+         "Value": "NginxProxyStackTwo/NginxLaunchTemplate"
         }
        ]
       },
@@ -566,13 +574,13 @@
        "Tags": [
         {
          "Key": "Name",
-         "Value": "NginxProxyStack/NginxLaunchTemplate"
+         "Value": "NginxProxyStackTwo/NginxLaunchTemplate"
         }
        ]
       }
      ],
      "UserData": {
-      "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    server_name _;\n\n    location / {\n        proxy_pass https://www.bim.com.sg;\n        proxy_set_header Host www.bim.com.sg;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /_next/ {\n        proxy_pass https://jobs.bimeco.io/_next/;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /career {\n        proxy_pass https://jobs.bimeco.io;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location /health {\n        access_log off;\n        return 200 'Healthy';\n    }\n\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
+      "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\nserver {\n    listen 80;\n    listen [::]:80;\n    server_name _;\n\n    location / {\n        proxy_pass https://www.bim.com.sg;\n        proxy_set_header Host www.bim.com.sg;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /_next/ {\n        proxy_pass https://jobs.bimeco.io/_next/;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /career {\n        proxy_pass https://jobs.bimeco.io;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location /health {\n        access_log off;\n        return 200 'Healthy';\n    }\n\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
      }
     },
     "TagSpecifications": [
@@ -581,14 +589,14 @@
       "Tags": [
        {
         "Key": "Name",
-        "Value": "NginxProxyStack/NginxLaunchTemplate"
+        "Value": "NginxProxyStackTwo/NginxLaunchTemplate"
        }
       ]
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxLaunchTemplate/Resource"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxLaunchTemplate/Resource"
    }
   },
   "NginxAsgASG6E998B71": {
@@ -629,7 +637,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxAsg/ASG"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxAsg/ASG"
    }
   },
   "NginxTargetGroup6C5FCDE3": {
@@ -653,7 +661,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxTargetGroup/Resource"
+    "aws:cdk:path": "NginxProxyStackTwo/NginxTargetGroup/Resource"
    }
   },
   "CDKMetadata": {
@@ -662,7 +670,7 @@
     "Analytics": "v2:deflate64:H4sIAAAAAAAA/32RQW/CMAyFfwv3kLFqf4BxQEhIQ4C4Tq7rFUPqVIkDQlX/+0TpaLfDTvH7/PT8pGT27dXOJnCNUyzOU8e5bXYKeDZwjZ8NYWabQ41m8SWHzcJsUu4YdykX0jsbpq1PSnvIHQ18YPMYPTIoe3mazSbwBZSGjJUoBSFdgtIVbv3RXs1VAY8ViZodYQqst2Xwqe7O/QtWUgaK0awhCR73VNUOtKv5m7SGHERldB6KHBwIspSXzDbzunaMXf21h+K921HoIsZ67OOoJL3nZx7t9xBK0mfhkWwNUlD+uhupAoGSgm0WA7v7R7I1kNRHBMdS2mae1O8e4pn+l7Wt2VL0KWAX9pG0To9f7GlrxBdkT/HlkmV2ZmeTU2SehiTKFdnt4/0Girg7Gz0CAAA="
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/CDKMetadata/Default"
+    "aws:cdk:path": "NginxProxyStackTwo/CDKMetadata/Default"
    }
   }
  },

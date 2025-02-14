@@ -12,17 +12,17 @@
           "version": "10.4.2"
         }
       },
-      "NginxProxyStack": {
-        "id": "NginxProxyStack",
-        "path": "NginxProxyStack",
+      "NginxProxyStackThree": {
+        "id": "NginxProxyStackThree",
+        "path": "NginxProxyStackThree",
         "children": {
           "NginxVpc": {
             "id": "NginxVpc",
-            "path": "NginxProxyStack/NginxVpc",
+            "path": "NginxProxyStackThree/NginxVpc",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "NginxProxyStack/NginxVpc/Resource",
+                "path": "NginxProxyStackThree/NginxVpc/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
                   "aws:cdk:cloudformation:props": {
@@ -33,7 +33,7 @@
                     "tags": [
                       {
                         "key": "Name",
-                        "value": "NginxProxyStack/NginxVpc"
+                        "value": "NginxProxyStackThree/NginxVpc"
                       }
                     ]
                   }
@@ -45,11 +45,11 @@
               },
               "PublicSubnet1": {
                 "id": "PublicSubnet1",
-                "path": "NginxProxyStack/NginxVpc/PublicSubnet1",
+                "path": "NginxProxyStackThree/NginxVpc/PublicSubnet1",
                 "children": {
                   "Subnet": {
                     "id": "Subnet",
-                    "path": "NginxProxyStack/NginxVpc/PublicSubnet1/Subnet",
+                    "path": "NginxProxyStackThree/NginxVpc/PublicSubnet1/Subnet",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
@@ -77,7 +77,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "NginxProxyStack/NginxVpc/PublicSubnet1"
+                            "value": "NginxProxyStackThree/NginxVpc/PublicSubnet1"
                           }
                         ]
                       }
@@ -89,7 +89,7 @@
                   },
                   "Acl": {
                     "id": "Acl",
-                    "path": "NginxProxyStack/NginxVpc/PublicSubnet1/Acl",
+                    "path": "NginxProxyStackThree/NginxVpc/PublicSubnet1/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.41.0"
@@ -97,7 +97,7 @@
                   },
                   "RouteTable": {
                     "id": "RouteTable",
-                    "path": "NginxProxyStack/NginxVpc/PublicSubnet1/RouteTable",
+                    "path": "NginxProxyStackThree/NginxVpc/PublicSubnet1/RouteTable",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
                       "aws:cdk:cloudformation:props": {
@@ -107,7 +107,7 @@
                         "tags": [
                           {
                             "key": "Name",
-                            "value": "NginxProxyStack/NginxVpc/PublicSubnet1"
+                            "value": "NginxProxyStackThree/NginxVpc/PublicSubnet1"
                           }
                         ]
                       }
@@ -119,7 +119,7 @@
                   },
                   "RouteTableAssociation": {
                     "id": "RouteTableAssociation",
-                    "path": "NginxProxyStack/NginxVpc/PublicSubnet1/RouteTableAssociation",
+                    "path": "NginxProxyStackThree/NginxVpc/PublicSubnet1/RouteTableAssociation",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
                       "aws:cdk:cloudformation:props": {
@@ -138,7 +138,7 @@
                   },
                   "DefaultRoute": {
                     "id": "DefaultRoute",
-                    "path": "NginxProxyStack/NginxVpc/PublicSubnet1/DefaultRoute",
+                    "path": "NginxProxyStackThree/NginxVpc/PublicSubnet1/DefaultRoute",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Route",
                       "aws:cdk:cloudformation:props": {
@@ -164,11 +164,11 @@
               },
               "PublicSubnet2": {
                 "id": "PublicSubnet2",
-                "path": "NginxProxyStack/NginxVpc/PublicSubnet2",
+                "path": "NginxProxyStackThree/NginxVpc/PublicSubnet2",
                 "children": {
                   "Subnet": {
                     "id": "Subnet",
-                    "path": "NginxProxyStack/NginxVpc/PublicSubnet2/Subnet",
+                    "path": "NginxProxyStackThree/NginxVpc/PublicSubnet2/Subnet",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
@@ -196,7 +196,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "NginxProxyStack/NginxVpc/PublicSubnet2"
+                            "value": "NginxProxyStackThree/NginxVpc/PublicSubnet2"
                           }
                         ]
                       }
@@ -208,7 +208,7 @@
                   },
                   "Acl": {
                     "id": "Acl",
-                    "path": "NginxProxyStack/NginxVpc/PublicSubnet2/Acl",
+                    "path": "NginxProxyStackThree/NginxVpc/PublicSubnet2/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.41.0"
@@ -216,7 +216,7 @@
                   },
                   "RouteTable": {
                     "id": "RouteTable",
-                    "path": "NginxProxyStack/NginxVpc/PublicSubnet2/RouteTable",
+                    "path": "NginxProxyStackThree/NginxVpc/PublicSubnet2/RouteTable",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
                       "aws:cdk:cloudformation:props": {
@@ -226,7 +226,7 @@
                         "tags": [
                           {
                             "key": "Name",
-                            "value": "NginxProxyStack/NginxVpc/PublicSubnet2"
+                            "value": "NginxProxyStackThree/NginxVpc/PublicSubnet2"
                           }
                         ]
                       }
@@ -238,7 +238,7 @@
                   },
                   "RouteTableAssociation": {
                     "id": "RouteTableAssociation",
-                    "path": "NginxProxyStack/NginxVpc/PublicSubnet2/RouteTableAssociation",
+                    "path": "NginxProxyStackThree/NginxVpc/PublicSubnet2/RouteTableAssociation",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
                       "aws:cdk:cloudformation:props": {
@@ -257,7 +257,7 @@
                   },
                   "DefaultRoute": {
                     "id": "DefaultRoute",
-                    "path": "NginxProxyStack/NginxVpc/PublicSubnet2/DefaultRoute",
+                    "path": "NginxProxyStackThree/NginxVpc/PublicSubnet2/DefaultRoute",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Route",
                       "aws:cdk:cloudformation:props": {
@@ -283,11 +283,11 @@
               },
               "IsolatedSubnet1": {
                 "id": "IsolatedSubnet1",
-                "path": "NginxProxyStack/NginxVpc/IsolatedSubnet1",
+                "path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1",
                 "children": {
                   "Subnet": {
                     "id": "Subnet",
-                    "path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/Subnet",
+                    "path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1/Subnet",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
@@ -315,7 +315,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "NginxProxyStack/NginxVpc/IsolatedSubnet1"
+                            "value": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1"
                           }
                         ]
                       }
@@ -327,7 +327,7 @@
                   },
                   "Acl": {
                     "id": "Acl",
-                    "path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/Acl",
+                    "path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.41.0"
@@ -335,7 +335,7 @@
                   },
                   "RouteTable": {
                     "id": "RouteTable",
-                    "path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/RouteTable",
+                    "path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1/RouteTable",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
                       "aws:cdk:cloudformation:props": {
@@ -345,7 +345,7 @@
                         "tags": [
                           {
                             "key": "Name",
-                            "value": "NginxProxyStack/NginxVpc/IsolatedSubnet1"
+                            "value": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1"
                           }
                         ]
                       }
@@ -357,7 +357,7 @@
                   },
                   "RouteTableAssociation": {
                     "id": "RouteTableAssociation",
-                    "path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/RouteTableAssociation",
+                    "path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1/RouteTableAssociation",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
                       "aws:cdk:cloudformation:props": {
@@ -382,11 +382,11 @@
               },
               "IsolatedSubnet2": {
                 "id": "IsolatedSubnet2",
-                "path": "NginxProxyStack/NginxVpc/IsolatedSubnet2",
+                "path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2",
                 "children": {
                   "Subnet": {
                     "id": "Subnet",
-                    "path": "NginxProxyStack/NginxVpc/IsolatedSubnet2/Subnet",
+                    "path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2/Subnet",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
                       "aws:cdk:cloudformation:props": {
@@ -414,7 +414,7 @@
                           },
                           {
                             "key": "Name",
-                            "value": "NginxProxyStack/NginxVpc/IsolatedSubnet2"
+                            "value": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2"
                           }
                         ]
                       }
@@ -426,7 +426,7 @@
                   },
                   "Acl": {
                     "id": "Acl",
-                    "path": "NginxProxyStack/NginxVpc/IsolatedSubnet2/Acl",
+                    "path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2/Acl",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
                       "version": "2.41.0"
@@ -434,7 +434,7 @@
                   },
                   "RouteTable": {
                     "id": "RouteTable",
-                    "path": "NginxProxyStack/NginxVpc/IsolatedSubnet2/RouteTable",
+                    "path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2/RouteTable",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
                       "aws:cdk:cloudformation:props": {
@@ -444,7 +444,7 @@
                         "tags": [
                           {
                             "key": "Name",
-                            "value": "NginxProxyStack/NginxVpc/IsolatedSubnet2"
+                            "value": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2"
                           }
                         ]
                       }
@@ -456,7 +456,7 @@
                   },
                   "RouteTableAssociation": {
                     "id": "RouteTableAssociation",
-                    "path": "NginxProxyStack/NginxVpc/IsolatedSubnet2/RouteTableAssociation",
+                    "path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2/RouteTableAssociation",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
                       "aws:cdk:cloudformation:props": {
@@ -481,14 +481,14 @@
               },
               "IGW": {
                 "id": "IGW",
-                "path": "NginxProxyStack/NginxVpc/IGW",
+                "path": "NginxProxyStackThree/NginxVpc/IGW",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
                   "aws:cdk:cloudformation:props": {
                     "tags": [
                       {
                         "key": "Name",
-                        "value": "NginxProxyStack/NginxVpc"
+                        "value": "NginxProxyStackThree/NginxVpc"
                       }
                     ]
                   }
@@ -500,7 +500,7 @@
               },
               "VPCGW": {
                 "id": "VPCGW",
-                "path": "NginxProxyStack/NginxVpc/VPCGW",
+                "path": "NginxProxyStackThree/NginxVpc/VPCGW",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
                   "aws:cdk:cloudformation:props": {
@@ -525,11 +525,11 @@
           },
           "AlbSecurityGroup": {
             "id": "AlbSecurityGroup",
-            "path": "NginxProxyStack/AlbSecurityGroup",
+            "path": "NginxProxyStackThree/AlbSecurityGroup",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "NginxProxyStack/AlbSecurityGroup/Resource",
+                "path": "NginxProxyStackThree/AlbSecurityGroup/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
                   "aws:cdk:cloudformation:props": {
@@ -575,11 +575,11 @@
           },
           "NginxSecurityGroup": {
             "id": "NginxSecurityGroup",
-            "path": "NginxProxyStack/NginxSecurityGroup",
+            "path": "NginxProxyStackThree/NginxSecurityGroup",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "NginxProxyStack/NginxSecurityGroup/Resource",
+                "path": "NginxProxyStackThree/NginxSecurityGroup/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
                   "aws:cdk:cloudformation:props": {
@@ -615,9 +615,9 @@
                   "version": "2.41.0"
                 }
               },
-              "from NginxProxyStackAlbSecurityGroup8F613DE3:80": {
-                "id": "from NginxProxyStackAlbSecurityGroup8F613DE3:80",
-                "path": "NginxProxyStack/NginxSecurityGroup/from NginxProxyStackAlbSecurityGroup8F613DE3:80",
+              "from NginxProxyStackThreeAlbSecurityGroup376B0B00:80": {
+                "id": "from NginxProxyStackThreeAlbSecurityGroup376B0B00:80",
+                "path": "NginxProxyStackThree/NginxSecurityGroup/from NginxProxyStackThreeAlbSecurityGroup376B0B00:80",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
                   "aws:cdk:cloudformation:props": {
@@ -652,11 +652,11 @@
           },
           "NginxAlb": {
             "id": "NginxAlb",
-            "path": "NginxProxyStack/NginxAlb",
+            "path": "NginxProxyStackThree/NginxAlb",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "NginxProxyStack/NginxAlb/Resource",
+                "path": "NginxProxyStackThree/NginxAlb/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
                   "aws:cdk:cloudformation:props": {
@@ -693,11 +693,11 @@
               },
               "Redirect80To443": {
                 "id": "Redirect80To443",
-                "path": "NginxProxyStack/NginxAlb/Redirect80To443",
+                "path": "NginxProxyStackThree/NginxAlb/Redirect80To443",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "NginxProxyStack/NginxAlb/Redirect80To443/Resource",
+                    "path": "NginxProxyStackThree/NginxAlb/Redirect80To443/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::Listener",
                       "aws:cdk:cloudformation:props": {
@@ -731,11 +731,11 @@
               },
               "HttpsListener": {
                 "id": "HttpsListener",
-                "path": "NginxProxyStack/NginxAlb/HttpsListener",
+                "path": "NginxProxyStackThree/NginxAlb/HttpsListener",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "NginxProxyStack/NginxAlb/HttpsListener/Resource",
+                    "path": "NginxProxyStackThree/NginxAlb/HttpsListener/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::Listener",
                       "aws:cdk:cloudformation:props": {
@@ -780,11 +780,11 @@
           },
           "NginxCertificate": {
             "id": "NginxCertificate",
-            "path": "NginxProxyStack/NginxCertificate",
+            "path": "NginxProxyStackThree/NginxCertificate",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "NginxProxyStack/NginxCertificate/Resource",
+                "path": "NginxProxyStackThree/NginxCertificate/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::CertificateManager::Certificate",
                   "aws:cdk:cloudformation:props": {
@@ -805,11 +805,11 @@
           },
           "NginxLaunchTemplate": {
             "id": "NginxLaunchTemplate",
-            "path": "NginxProxyStack/NginxLaunchTemplate",
+            "path": "NginxProxyStackThree/NginxLaunchTemplate",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "NginxProxyStack/NginxLaunchTemplate/Resource",
+                "path": "NginxProxyStackThree/NginxLaunchTemplate/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::LaunchTemplate",
                   "aws:cdk:cloudformation:props": {
@@ -830,7 +830,7 @@
                           "tags": [
                             {
                               "key": "Name",
-                              "value": "NginxProxyStack/NginxLaunchTemplate"
+                              "value": "NginxProxyStackThree/NginxLaunchTemplate"
                             }
                           ]
                         },
@@ -839,7 +839,7 @@
                           "tags": [
                             {
                               "key": "Name",
-                              "value": "NginxProxyStack/NginxLaunchTemplate"
+                              "value": "NginxProxyStackThree/NginxLaunchTemplate"
                             }
                           ]
                         }
@@ -854,7 +854,7 @@
                         "tags": [
                           {
                             "key": "Name",
-                            "value": "NginxProxyStack/NginxLaunchTemplate"
+                            "value": "NginxProxyStackThree/NginxLaunchTemplate"
                           }
                         ]
                       }
@@ -874,11 +874,11 @@
           },
           "NginxAsg": {
             "id": "NginxAsg",
-            "path": "NginxProxyStack/NginxAsg",
+            "path": "NginxProxyStackThree/NginxAsg",
             "children": {
               "ASG": {
                 "id": "ASG",
-                "path": "NginxProxyStack/NginxAsg/ASG",
+                "path": "NginxProxyStackThree/NginxAsg/ASG",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::AutoScaling::AutoScalingGroup",
                   "aws:cdk:cloudformation:props": {
@@ -925,11 +925,11 @@
           },
           "NginxTargetGroup": {
             "id": "NginxTargetGroup",
-            "path": "NginxProxyStack/NginxTargetGroup",
+            "path": "NginxProxyStackThree/NginxTargetGroup",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "NginxProxyStack/NginxTargetGroup/Resource",
+                "path": "NginxProxyStackThree/NginxTargetGroup/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
                   "aws:cdk:cloudformation:props": {
@@ -964,7 +964,7 @@
           },
           "LoadBalancerDNS": {
             "id": "LoadBalancerDNS",
-            "path": "NginxProxyStack/LoadBalancerDNS",
+            "path": "NginxProxyStackThree/LoadBalancerDNS",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.41.0"
@@ -972,11 +972,11 @@
           },
           "CDKMetadata": {
             "id": "CDKMetadata",
-            "path": "NginxProxyStack/CDKMetadata",
+            "path": "NginxProxyStackThree/CDKMetadata",
             "children": {
               "Default": {
                 "id": "Default",
-                "path": "NginxProxyStack/CDKMetadata/Default",
+                "path": "NginxProxyStackThree/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnResource",
                   "version": "2.41.0"

@@ -10,12 +10,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc"
+      "Value": "NginxProxyStackThree/NginxVpc"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/Resource"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/Resource"
    }
   },
   "NginxVpcPublicSubnet1SubnetFD3CAA71": {
@@ -45,12 +45,12 @@
      },
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/PublicSubnet1"
+      "Value": "NginxProxyStackThree/NginxVpc/PublicSubnet1"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet1/Subnet"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/PublicSubnet1/Subnet"
    }
   },
   "NginxVpcPublicSubnet1RouteTableDE29045F": {
@@ -62,12 +62,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/PublicSubnet1"
+      "Value": "NginxProxyStackThree/NginxVpc/PublicSubnet1"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet1/RouteTable"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/PublicSubnet1/RouteTable"
    }
   },
   "NginxVpcPublicSubnet1RouteTableAssociation8988997E": {
@@ -81,7 +81,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet1/RouteTableAssociation"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/PublicSubnet1/RouteTableAssociation"
    }
   },
   "NginxVpcPublicSubnet1DefaultRoute8E2C4B50": {
@@ -99,7 +99,7 @@
     "NginxVpcVPCGWA22A08F1"
    ],
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet1/DefaultRoute"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/PublicSubnet1/DefaultRoute"
    }
   },
   "NginxVpcPublicSubnet2Subnet070965F9": {
@@ -129,12 +129,12 @@
      },
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/PublicSubnet2"
+      "Value": "NginxProxyStackThree/NginxVpc/PublicSubnet2"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet2/Subnet"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/PublicSubnet2/Subnet"
    }
   },
   "NginxVpcPublicSubnet2RouteTableD2BFAC61": {
@@ -146,12 +146,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/PublicSubnet2"
+      "Value": "NginxProxyStackThree/NginxVpc/PublicSubnet2"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet2/RouteTable"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/PublicSubnet2/RouteTable"
    }
   },
   "NginxVpcPublicSubnet2RouteTableAssociationE6BE9BCB": {
@@ -165,7 +165,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet2/RouteTableAssociation"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/PublicSubnet2/RouteTableAssociation"
    }
   },
   "NginxVpcPublicSubnet2DefaultRouteFFF221F2": {
@@ -183,7 +183,7 @@
     "NginxVpcVPCGWA22A08F1"
    ],
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/PublicSubnet2/DefaultRoute"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/PublicSubnet2/DefaultRoute"
    }
   },
   "NginxVpcIsolatedSubnet1Subnet9CA57C33": {
@@ -213,12 +213,12 @@
      },
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/IsolatedSubnet1"
+      "Value": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/Subnet"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1/Subnet"
    }
   },
   "NginxVpcIsolatedSubnet1RouteTable7BA216E2": {
@@ -230,12 +230,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/IsolatedSubnet1"
+      "Value": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/RouteTable"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1/RouteTable"
    }
   },
   "NginxVpcIsolatedSubnet1RouteTableAssociationB974B368": {
@@ -249,7 +249,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet1/RouteTableAssociation"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1/RouteTableAssociation"
    }
   },
   "NginxVpcIsolatedSubnet2SubnetB99DDB07": {
@@ -279,12 +279,12 @@
      },
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/IsolatedSubnet2"
+      "Value": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet2/Subnet"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2/Subnet"
    }
   },
   "NginxVpcIsolatedSubnet2RouteTable5365FB87": {
@@ -296,12 +296,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc/IsolatedSubnet2"
+      "Value": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet2/RouteTable"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2/RouteTable"
    }
   },
   "NginxVpcIsolatedSubnet2RouteTableAssociationD8F91B56": {
@@ -315,7 +315,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IsolatedSubnet2/RouteTableAssociation"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2/RouteTableAssociation"
    }
   },
   "NginxVpcIGW5BF51E51": {
@@ -324,12 +324,12 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "NginxProxyStack/NginxVpc"
+      "Value": "NginxProxyStackThree/NginxVpc"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/IGW"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/IGW"
    }
   },
   "NginxVpcVPCGWA22A08F1": {
@@ -343,7 +343,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxVpc/VPCGW"
+    "aws:cdk:path": "NginxProxyStackThree/NginxVpc/VPCGW"
    }
   },
   "AlbSecurityGroup86A59E99": {
@@ -378,7 +378,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/AlbSecurityGroup/Resource"
+    "aws:cdk:path": "NginxProxyStackThree/AlbSecurityGroup/Resource"
    }
   },
   "NginxSecurityGroupFD5E8C12": {
@@ -411,10 +411,10 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxSecurityGroup/Resource"
+    "aws:cdk:path": "NginxProxyStackThree/NginxSecurityGroup/Resource"
    }
   },
-  "NginxSecurityGroupfromNginxProxyStackAlbSecurityGroup8F613DE38004C56EA1": {
+  "NginxSecurityGroupfromNginxProxyStackThreeAlbSecurityGroup376B0B0080BA886D7B": {
    "Type": "AWS::EC2::SecurityGroupIngress",
    "Properties": {
     "IpProtocol": "tcp",
@@ -435,7 +435,7 @@
     "ToPort": 80
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxSecurityGroup/from NginxProxyStackAlbSecurityGroup8F613DE3:80"
+    "aws:cdk:path": "NginxProxyStackThree/NginxSecurityGroup/from NginxProxyStackThreeAlbSecurityGroup376B0B00:80"
    }
   },
   "NginxAlb10923154": {
@@ -473,7 +473,7 @@
     "NginxVpcPublicSubnet2RouteTableAssociationE6BE9BCB"
    ],
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxAlb/Resource"
+    "aws:cdk:path": "NginxProxyStackThree/NginxAlb/Resource"
    }
   },
   "NginxAlbRedirect80To4438A980C0E": {
@@ -496,7 +496,7 @@
     "Protocol": "HTTP"
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxAlb/Redirect80To443/Resource"
+    "aws:cdk:path": "NginxProxyStackThree/NginxAlb/Redirect80To443/Resource"
    }
   },
   "NginxAlbHttpsListenerDE052181": {
@@ -524,7 +524,7 @@
     "Protocol": "HTTPS"
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxAlb/HttpsListener/Resource"
+    "aws:cdk:path": "NginxProxyStackThree/NginxAlb/HttpsListener/Resource"
    }
   },
   "NginxCertificate26E222C0": {
@@ -534,7 +534,7 @@
     "ValidationMethod": "DNS"
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxCertificate/Resource"
+    "aws:cdk:path": "NginxProxyStackThree/NginxCertificate/Resource"
    }
   },
   "NginxLaunchTemplate4364E9F8": {
@@ -557,7 +557,7 @@
        "Tags": [
         {
          "Key": "Name",
-         "Value": "NginxProxyStack/NginxLaunchTemplate"
+         "Value": "NginxProxyStackThree/NginxLaunchTemplate"
         }
        ]
       },
@@ -566,7 +566,7 @@
        "Tags": [
         {
          "Key": "Name",
-         "Value": "NginxProxyStack/NginxLaunchTemplate"
+         "Value": "NginxProxyStackThree/NginxLaunchTemplate"
         }
        ]
       }
@@ -581,14 +581,14 @@
       "Tags": [
        {
         "Key": "Name",
-        "Value": "NginxProxyStack/NginxLaunchTemplate"
+        "Value": "NginxProxyStackThree/NginxLaunchTemplate"
        }
       ]
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxLaunchTemplate/Resource"
+    "aws:cdk:path": "NginxProxyStackThree/NginxLaunchTemplate/Resource"
    }
   },
   "NginxAsgASG6E998B71": {
@@ -629,7 +629,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxAsg/ASG"
+    "aws:cdk:path": "NginxProxyStackThree/NginxAsg/ASG"
    }
   },
   "NginxTargetGroup6C5FCDE3": {
@@ -653,7 +653,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/NginxTargetGroup/Resource"
+    "aws:cdk:path": "NginxProxyStackThree/NginxTargetGroup/Resource"
    }
   },
   "CDKMetadata": {
@@ -662,7 +662,7 @@
     "Analytics": "v2:deflate64:H4sIAAAAAAAA/32RQW/CMAyFfwv3kLFqf4BxQEhIQ4C4Tq7rFUPqVIkDQlX/+0TpaLfDTvH7/PT8pGT27dXOJnCNUyzOU8e5bXYKeDZwjZ8NYWabQ41m8SWHzcJsUu4YdykX0jsbpq1PSnvIHQ18YPMYPTIoe3mazSbwBZSGjJUoBSFdgtIVbv3RXs1VAY8ViZodYQqst2Xwqe7O/QtWUgaK0awhCR73VNUOtKv5m7SGHERldB6KHBwIspSXzDbzunaMXf21h+K921HoIsZ67OOoJL3nZx7t9xBK0mfhkWwNUlD+uhupAoGSgm0WA7v7R7I1kNRHBMdS2mae1O8e4pn+l7Wt2VL0KWAX9pG0To9f7GlrxBdkT/HlkmV2ZmeTU2SehiTKFdnt4/0Girg7Gz0CAAA="
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStack/CDKMetadata/Default"
+    "aws:cdk:path": "NginxProxyStackThree/CDKMetadata/Default"
    }
   }
  },
