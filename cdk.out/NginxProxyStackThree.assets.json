@@ -1,7 +1,7 @@
 {
   "version": "21.0.0",
   "files": {
-    "d8f805c1c96027fe887bd00e88ff7b522d0f17e8af20d5099102ec4cd6716543": {
+    "25ed33de7509ec21fd6f5ce1b4b5f2285408e983f30a4b7f74356a2212ae11bf": {
       "source": {
         "path": "NginxProxyStackThree.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "current_account-ap-southeast-1": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1",
-          "objectKey": "d8f805c1c96027fe887bd00e88ff7b522d0f17e8af20d5099102ec4cd6716543.json",
+          "objectKey": "25ed33de7509ec21fd6f5ce1b4b5f2285408e983f30a4b7f74356a2212ae11bf.json",
           "region": "ap-southeast-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-ap-southeast-1"
         }
