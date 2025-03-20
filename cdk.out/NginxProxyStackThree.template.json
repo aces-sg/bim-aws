@@ -537,7 +537,10 @@
   "NginxCertificate26E222C0": {
    "Type": "AWS::CertificateManager::Certificate",
    "Properties": {
-    "DomainName": "*.bim.com.sg",
+    "DomainName": "bim.com.sg",
+    "SubjectAlternativeNames": [
+     "*.bim.com.sg"
+    ],
     "ValidationMethod": "DNS"
    },
    "Metadata": {

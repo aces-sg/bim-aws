@@ -795,7 +795,10 @@
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::CertificateManager::Certificate",
                   "aws:cdk:cloudformation:props": {
-                    "domainName": "*.bim.com.sg",
+                    "domainName": "bim.com.sg",
+                    "subjectAlternativeNames": [
+                      "*.bim.com.sg"
+                    ],
                     "validationMethod": "DNS"
                   }
                 },
