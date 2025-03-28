@@ -84,26 +84,26 @@ server {
     listen [::]:80 default_server;
     server_name _;
 
-    location / {
-        proxy_pass https://static.bim.com.sg;
-        proxy_set_header Host static.bim.com.sg;
+    location /blog/_next {
+        proxy_pass https://blog.bimeco.io/blog/_next;
+        proxy_set_header Host blog.bimeco.io;
         proxy_set_header X-Real-IP \\$remote_addr;
         proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto \\$scheme;
         proxy_ssl_server_name on;
     }
-
-    location /_next/ {
-        proxy_pass https://jobs.bimeco.io/_next/;
-        proxy_set_header Host jobs.bimeco.io;
+        
+    location /blog {
+        proxy_pass https://blog.bimeco.io/blog;
+        proxy_set_header Host blog.bimeco.io;
         proxy_set_header X-Real-IP \\$remote_addr;
         proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto \\$scheme;
         proxy_ssl_server_name on;
     }
-
-    location /career {
-        proxy_pass https://jobs.bimeco.io;
+        
+    location /career/_next {
+        proxy_pass https://jobs.bimeco.io/career/_next;
         proxy_set_header Host jobs.bimeco.io;
         proxy_set_header X-Real-IP \\$remote_addr;
         proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;
@@ -112,6 +112,27 @@ server {
         proxy_redirect https://jobs.bimeco.io/career/ /jobs/;
         proxy_connect_timeout 60s;
         proxy_read_timeout 60s;
+    }
+
+    location /career {
+        proxy_pass https://jobs.bimeco.io/career;
+        proxy_set_header Host jobs.bimeco.io;
+        proxy_set_header X-Real-IP \\$remote_addr;
+        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \\$scheme;
+        proxy_ssl_server_name on;
+        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;
+        proxy_connect_timeout 60s;
+        proxy_read_timeout 60s;
+    }
+
+    location / {
+        proxy_pass https://static.bim.com.sg;
+        proxy_set_header Host static.bim.com.sg;
+        proxy_set_header X-Real-IP \\$remote_addr;
+        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \\$scheme;
+        proxy_ssl_server_name on;
     }
 
     location /health {
