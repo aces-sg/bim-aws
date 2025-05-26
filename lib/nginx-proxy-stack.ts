@@ -73,6 +73,16 @@ export class NginxProxyStack extends cdk.Stack {
       validation: acm.CertificateValidation.fromDns(),
     });
 
+    const bimecocertificate = new acm.Certificate(
+      this,
+      "NginxCertificateBimeco",
+      {
+        domainName: "bimeco.io",
+        subjectAlternativeNames: ["*.bimeco.io"],
+        validation: acm.CertificateValidation.fromDns(),
+      }
+    );
+
     // User data script for Nginx setup
     const userData = ec2.UserData.forLinux();
     userData.addCommands(
@@ -206,6 +216,7 @@ EOF'`,
       defaultAction: elbv2.ListenerAction.forward([targetGroup]),
       certificates: [
         elbv2.ListenerCertificate.fromCertificateManager(certificate),
+        elbv2.ListenerCertificate.fromCertificateManager(bimecocertificate),
       ],
     });
 

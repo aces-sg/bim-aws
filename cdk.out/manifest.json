@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-ap-southeast-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-ap-southeast-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/7b35edcf87f7635ef4b39a539a3bdf07759b10e9305b555aebd0dcac00c4467f.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-ap-southeast-1/6e63eb251c8d6c4e3b3e1d9d64762262ccd76ee20c94d40497b162810ae31098.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -177,10 +177,22 @@
             "data": "NginxAlbHttpsListenerDE052181"
           }
         ],
+        "/NginxProxyStackThree/NginxAlb/HttpsListener/DefaultCertificates1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxAlbHttpsListenerDefaultCertificates1A5074179"
+          }
+        ],
         "/NginxProxyStackThree/NginxCertificate/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "NginxCertificate26E222C0"
+          }
+        ],
+        "/NginxProxyStackThree/NginxCertificateBimeco/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NginxCertificateBimeco092251A9"
           }
         ],
         "/NginxProxyStackThree/NginxLaunchTemplate/Resource": [

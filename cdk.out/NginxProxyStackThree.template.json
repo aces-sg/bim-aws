@@ -534,6 +534,24 @@
     "aws:cdk:path": "NginxProxyStackThree/NginxAlb/HttpsListener/Resource"
    }
   },
+  "NginxAlbHttpsListenerDefaultCertificates1A5074179": {
+   "Type": "AWS::ElasticLoadBalancingV2::ListenerCertificate",
+   "Properties": {
+    "Certificates": [
+     {
+      "CertificateArn": {
+       "Ref": "NginxCertificateBimeco092251A9"
+      }
+     }
+    ],
+    "ListenerArn": {
+     "Ref": "NginxAlbHttpsListenerDE052181"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStackThree/NginxAlb/HttpsListener/DefaultCertificates1/Resource"
+   }
+  },
   "NginxCertificate26E222C0": {
    "Type": "AWS::CertificateManager::Certificate",
    "Properties": {
@@ -545,6 +563,19 @@
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStackThree/NginxCertificate/Resource"
+   }
+  },
+  "NginxCertificateBimeco092251A9": {
+   "Type": "AWS::CertificateManager::Certificate",
+   "Properties": {
+    "DomainName": "bimeco.io",
+    "SubjectAlternativeNames": [
+     "*.bimeco.io"
+    ],
+    "ValidationMethod": "DNS"
+   },
+   "Metadata": {
+    "aws:cdk:path": "NginxProxyStackThree/NginxCertificateBimeco/Resource"
    }
   },
   "NginxLaunchTemplate4364E9F8": {
@@ -583,7 +614,7 @@
       }
      ],
      "UserData": {
-      "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    server_name _;\n\n    location /blog/_next {\n        proxy_pass https://blog.bimeco.io/blog/_next;\n        proxy_set_header Host blog.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n        \n    location /blog {\n        proxy_pass https://blog.bimeco.io/blog;\n        proxy_set_header Host blog.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n        \n    location /career/_next {\n        proxy_pass https://jobs.bimeco.io/career/_next;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location /career {\n        proxy_pass https://jobs.bimeco.io/career;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location / {\n        proxy_pass https://static.bim.com.sg;\n        proxy_set_header Host static.bim.com.sg;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /health {\n        access_log off;\n        return 200 'Healthy';\n    }\n\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
+      "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    server_name _;\n\n    location /blog/_next {\n        proxy_pass https://blog.bimeco.io/blog/_next;\n        proxy_set_header Host blog.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n        \n    location /blog {\n        proxy_pass https://blog.bimeco.io/blog;\n        proxy_set_header Host blog.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n        \n    location /career/_next {\n        proxy_pass https://jobs.bimeco.io/career/_next;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location /career {\n        proxy_pass https://jobs.bimeco.io/career;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location / {\n        proxy_pass https://static.bim.com.sg;\n        proxy_set_header Host static.bim.com.sg;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /health {\n        access_log off;\n        return 200 'Healthy';\n    }\n\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
      }
     },
     "TagSpecifications": [
@@ -670,7 +701,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/32RQYvCMBCFf4v3mNXiH+h6EEFQrHhdptOxjqZJSSaKlP73xdq13T3sKfO+ebx5kEQv5no2gXuYYnGdGs51kwngVcE9fDWEiW6ONarlyR53S7WLuWHMYm5JnmyY9i4KHSA3NPCBpSE4ZBB29m1WO883EBoy1lbIW5IVCN3h0R/tVSoCeK7IisoIo2d5rLyLdXfuX7C2pacQ1AaixfOBqtqAdDV/k1aRgSCMxkGRgwGLbMtbopu0rg1jV3/joPjsduS7iLEe+zgI2d7zM4/2B/AlybvwSLYKyQufnkaqwEJJXjfLgT39I9kqiOICgmFb6iaN4rKXeKf/ZW2r9hRc9NiFbaPU8fWLPW2VdQXpS/i4JYmeL/RscgnMUx+tcEV6/3q/AZg501s+AgAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/32RQYvCMBCFf4v3mFXZw15dDyIIK1a8LtNxrNE0KclEkdL/vrFWm5VloZB537y8ZNKJfB/L0QAufoi701CrXNYZA55ERN814UTW2wrFbG+2q5lYhVwrzEJuiG+sr9Y2MG0g19Tznk29t6iAlTVPs1g5dQamPmNhmFys55Fe4Nod2qkpx2sdSjIsMsLgFF/nzoaqPe5fsDCFI+/FEoLBw4bKSsfIm+03aQRp8KxQW9jloMGgMsU5vsC0quLY7fWXsffZ9si1EalOfcozmc7zqP/oz8ix2t8gpdYUJ7s24Ir4Po8xE9kI7LeUYKAgJ+uX9EQ2AgJbj6DjjHHCKLK7eKa/sqYRa/I2OGzDvgJX4f7vO9oIY3ckj/7tPP6Q8RsNjl6poQuGVUlyfV9/ANiw4nV0AgAA"
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStackThree/CDKMetadata/Default"
