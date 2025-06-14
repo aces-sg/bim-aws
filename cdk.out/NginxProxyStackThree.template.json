@@ -578,7 +578,7 @@
     "aws:cdk:path": "NginxProxyStackThree/NginxCertificateBimeco/Resource"
    }
   },
-  "NginxLaunchTemplate4364E9F8": {
+  "NginxLaunchTemplatev2E8577933": {
    "Type": "AWS::EC2::LaunchTemplate",
    "Properties": {
     "LaunchTemplateData": {
@@ -599,7 +599,7 @@
        "Tags": [
         {
          "Key": "Name",
-         "Value": "NginxProxyStackThree/NginxLaunchTemplate"
+         "Value": "NginxProxyStackThree/NginxLaunchTemplate-v2"
         }
        ]
       },
@@ -608,13 +608,13 @@
        "Tags": [
         {
          "Key": "Name",
-         "Value": "NginxProxyStackThree/NginxLaunchTemplate"
+         "Value": "NginxProxyStackThree/NginxLaunchTemplate-v2"
         }
        ]
       }
      ],
      "UserData": {
-      "Fn::Base64": "#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\nsudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    server_name _;\n\n    location /blog/_next {\n        proxy_pass https://blog.bimeco.io/blog/_next;\n        proxy_set_header Host blog.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n        \n    location /blog {\n        proxy_pass https://blog.bimeco.io/blog;\n        proxy_set_header Host blog.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n        \n    location /career/_next {\n        proxy_pass https://jobs.bimeco.io/career/_next;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location /career {\n        proxy_pass https://jobs.bimeco.io/career;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location / {\n        proxy_pass https://static.bim.com.sg;\n        proxy_set_header Host static.bim.com.sg;\n        proxy_set_header X-Real-IP \\$remote_addr;\n        proxy_set_header X-Forwarded-For \\$proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto \\$scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /health {\n        access_log off;\n        return 200 'Healthy';\n    }\n\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\nEOF'\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx"
+      "Fn::Base64": "#!/bin/bash\n#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y nginx\ncat > /etc/nginx/sites-available/default <<'EOF'\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    server_name _;\n\n    location /blog/_next {\n        proxy_pass https://blog.bimeco.io/blog/_next;\n        proxy_set_header Host blog.bimeco.io;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /blog {\n        proxy_pass https://blog.bimeco.io/blog;\n        proxy_set_header Host blog.bimeco.io;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /career/_next {\n        proxy_pass https://jobs.bimeco.io/career/_next;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_ssl_server_name on;\n        proxy_redirect https://jobs.bimeco.io/career/ /jobs/;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location /career {\n        proxy_pass https://jobs.bimeco.io/career;\n        proxy_set_header Host jobs.bimeco.io;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_ssl_server_name on;\n        proxy_connect_timeout 60s;\n        proxy_read_timeout 60s;\n    }\n\n    location / {\n        proxy_pass https://static.bim.com.sg;\n        proxy_set_header Host static.bim.com.sg;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_ssl_server_name on;\n    }\n\n    location /health {\n        access_log off;\n        return 200 'Healthy';\n    }\n\n    error_page 404 /404.html;\n    error_page 500 502 503 504 /50x.html;\n    location = /50x.html {\n        root /usr/share/nginx/html;\n    }\n}\nEOF\n\nsudo nginx -t\nsudo systemctl restart nginx\nsudo systemctl enable nginx\n"
      }
     },
     "TagSpecifications": [
@@ -623,14 +623,14 @@
       "Tags": [
        {
         "Key": "Name",
-        "Value": "NginxProxyStackThree/NginxLaunchTemplate"
+        "Value": "NginxProxyStackThree/NginxLaunchTemplate-v2"
        }
       ]
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "NginxProxyStackThree/NginxLaunchTemplate/Resource"
+    "aws:cdk:path": "NginxProxyStackThree/NginxLaunchTemplate-v2/Resource"
    }
   },
   "NginxAsgASG6E998B71": {
@@ -642,11 +642,11 @@
     "HealthCheckType": "ELB",
     "LaunchTemplate": {
      "LaunchTemplateId": {
-      "Ref": "NginxLaunchTemplate4364E9F8"
+      "Ref": "NginxLaunchTemplatev2E8577933"
      },
      "Version": {
       "Fn::GetAtt": [
-       "NginxLaunchTemplate4364E9F8",
+       "NginxLaunchTemplatev2E8577933",
        "LatestVersionNumber"
       ]
      }
