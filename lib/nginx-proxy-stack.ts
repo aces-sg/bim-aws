@@ -87,7 +87,7 @@ export class NginxProxyStack extends cdk.Stack {
 
     // User data script for Nginx setup
     const userData = ec2.UserData.forLinux();
-    const initBlog = path.join(__dirname, "./bootstrap-blog.sh");
+    const initBlog = path.join(__dirname, "../scripts/bootstrap-blog.sh");
     const userDataScript = fs.readFileSync(initBlog, "utf8");
 
     userData.addCommands(userDataScript);
