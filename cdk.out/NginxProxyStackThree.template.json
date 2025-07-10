@@ -21,9 +21,6 @@
   "NginxVpcPublicSubnet1SubnetFD3CAA71": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "VpcId": {
-     "Ref": "NginxVpcFE1B165E"
-    },
     "AvailabilityZone": {
      "Fn::Select": [
       0,
@@ -47,7 +44,10 @@
       "Key": "Name",
       "Value": "NginxProxyStackThree/NginxVpc/PublicSubnet1"
      }
-    ]
+    ],
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    }
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStackThree/NginxVpc/PublicSubnet1/Subnet"
@@ -56,15 +56,15 @@
   "NginxVpcPublicSubnet1RouteTableDE29045F": {
    "Type": "AWS::EC2::RouteTable",
    "Properties": {
-    "VpcId": {
-     "Ref": "NginxVpcFE1B165E"
-    },
     "Tags": [
      {
       "Key": "Name",
       "Value": "NginxProxyStackThree/NginxVpc/PublicSubnet1"
      }
-    ]
+    ],
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    }
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStackThree/NginxVpc/PublicSubnet1/RouteTable"
@@ -87,12 +87,12 @@
   "NginxVpcPublicSubnet1DefaultRoute8E2C4B50": {
    "Type": "AWS::EC2::Route",
    "Properties": {
-    "RouteTableId": {
-     "Ref": "NginxVpcPublicSubnet1RouteTableDE29045F"
-    },
     "DestinationCidrBlock": "0.0.0.0/0",
     "GatewayId": {
      "Ref": "NginxVpcIGW5BF51E51"
+    },
+    "RouteTableId": {
+     "Ref": "NginxVpcPublicSubnet1RouteTableDE29045F"
     }
    },
    "DependsOn": [
@@ -105,9 +105,6 @@
   "NginxVpcPublicSubnet2Subnet070965F9": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "VpcId": {
-     "Ref": "NginxVpcFE1B165E"
-    },
     "AvailabilityZone": {
      "Fn::Select": [
       1,
@@ -131,7 +128,10 @@
       "Key": "Name",
       "Value": "NginxProxyStackThree/NginxVpc/PublicSubnet2"
      }
-    ]
+    ],
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    }
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStackThree/NginxVpc/PublicSubnet2/Subnet"
@@ -140,15 +140,15 @@
   "NginxVpcPublicSubnet2RouteTableD2BFAC61": {
    "Type": "AWS::EC2::RouteTable",
    "Properties": {
-    "VpcId": {
-     "Ref": "NginxVpcFE1B165E"
-    },
     "Tags": [
      {
       "Key": "Name",
       "Value": "NginxProxyStackThree/NginxVpc/PublicSubnet2"
      }
-    ]
+    ],
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    }
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStackThree/NginxVpc/PublicSubnet2/RouteTable"
@@ -171,12 +171,12 @@
   "NginxVpcPublicSubnet2DefaultRouteFFF221F2": {
    "Type": "AWS::EC2::Route",
    "Properties": {
-    "RouteTableId": {
-     "Ref": "NginxVpcPublicSubnet2RouteTableD2BFAC61"
-    },
     "DestinationCidrBlock": "0.0.0.0/0",
     "GatewayId": {
      "Ref": "NginxVpcIGW5BF51E51"
+    },
+    "RouteTableId": {
+     "Ref": "NginxVpcPublicSubnet2RouteTableD2BFAC61"
     }
    },
    "DependsOn": [
@@ -189,9 +189,6 @@
   "NginxVpcIsolatedSubnet1Subnet9CA57C33": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "VpcId": {
-     "Ref": "NginxVpcFE1B165E"
-    },
     "AvailabilityZone": {
      "Fn::Select": [
       0,
@@ -215,7 +212,10 @@
       "Key": "Name",
       "Value": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1"
      }
-    ]
+    ],
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    }
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1/Subnet"
@@ -224,15 +224,15 @@
   "NginxVpcIsolatedSubnet1RouteTable7BA216E2": {
    "Type": "AWS::EC2::RouteTable",
    "Properties": {
-    "VpcId": {
-     "Ref": "NginxVpcFE1B165E"
-    },
     "Tags": [
      {
       "Key": "Name",
       "Value": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1"
      }
-    ]
+    ],
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    }
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet1/RouteTable"
@@ -255,9 +255,6 @@
   "NginxVpcIsolatedSubnet2SubnetB99DDB07": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
-    "VpcId": {
-     "Ref": "NginxVpcFE1B165E"
-    },
     "AvailabilityZone": {
      "Fn::Select": [
       1,
@@ -281,7 +278,10 @@
       "Key": "Name",
       "Value": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2"
      }
-    ]
+    ],
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    }
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2/Subnet"
@@ -290,15 +290,15 @@
   "NginxVpcIsolatedSubnet2RouteTable5365FB87": {
    "Type": "AWS::EC2::RouteTable",
    "Properties": {
-    "VpcId": {
-     "Ref": "NginxVpcFE1B165E"
-    },
     "Tags": [
      {
       "Key": "Name",
       "Value": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2"
      }
-    ]
+    ],
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
+    }
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStackThree/NginxVpc/IsolatedSubnet2/RouteTable"
@@ -335,11 +335,11 @@
   "NginxVpcVPCGWA22A08F1": {
    "Type": "AWS::EC2::VPCGatewayAttachment",
    "Properties": {
-    "VpcId": {
-     "Ref": "NginxVpcFE1B165E"
-    },
     "InternetGatewayId": {
      "Ref": "NginxVpcIGW5BF51E51"
+    },
+    "VpcId": {
+     "Ref": "NginxVpcFE1B165E"
     }
    },
    "Metadata": {
@@ -424,7 +424,6 @@
   "NginxSecurityGroupfromNginxProxyStackThreeAlbSecurityGroup376B0B0080BA886D7B": {
    "Type": "AWS::EC2::SecurityGroupIngress",
    "Properties": {
-    "IpProtocol": "tcp",
     "Description": "Load balancer to target",
     "FromPort": 80,
     "GroupId": {
@@ -433,6 +432,7 @@
       "GroupId"
      ]
     },
+    "IpProtocol": "tcp",
     "SourceSecurityGroupId": {
      "Fn::GetAtt": [
       "AlbSecurityGroup86A59E99",
@@ -509,6 +509,13 @@
   "NginxAlbHttpsListenerDE052181": {
    "Type": "AWS::ElasticLoadBalancingV2::Listener",
    "Properties": {
+    "Certificates": [
+     {
+      "CertificateArn": {
+       "Ref": "NginxCertificate26E222C0"
+      }
+     }
+    ],
     "DefaultActions": [
      {
       "TargetGroupArn": {
@@ -520,13 +527,6 @@
     "LoadBalancerArn": {
      "Ref": "NginxAlb10923154"
     },
-    "Certificates": [
-     {
-      "CertificateArn": {
-       "Ref": "NginxCertificate26E222C0"
-      }
-     }
-    ],
     "Port": 443,
     "Protocol": "HTTPS"
    },
@@ -559,6 +559,12 @@
     "SubjectAlternativeNames": [
      "*.bim.com.sg"
     ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "NginxProxyStackThree/NginxCertificate"
+     }
+    ],
     "ValidationMethod": "DNS"
    },
    "Metadata": {
@@ -571,6 +577,12 @@
     "DomainName": "bimeco.io",
     "SubjectAlternativeNames": [
      "*.bimeco.io"
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "NginxProxyStackThree/NginxCertificateBimeco"
+     }
     ],
     "ValidationMethod": "DNS"
    },
@@ -636,8 +648,6 @@
   "NginxAsgASG6E998B71": {
    "Type": "AWS::AutoScaling::AutoScalingGroup",
    "Properties": {
-    "MaxSize": "4",
-    "MinSize": "3",
     "HealthCheckGracePeriod": 1800,
     "HealthCheckType": "ELB",
     "LaunchTemplate": {
@@ -651,6 +661,8 @@
       ]
      }
     },
+    "MaxSize": "4",
+    "MinSize": "3",
     "TargetGroupARNs": [
      {
       "Ref": "NginxTargetGroup6C5FCDE3"
@@ -701,7 +713,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/32RQYvCMBCFf4v3mFXZw15dDyIIK1a8LtNxrNE0KclEkdL/vrFWm5VloZB537y8ZNKJfB/L0QAufoi701CrXNYZA55ERN814UTW2wrFbG+2q5lYhVwrzEJuiG+sr9Y2MG0g19Tznk29t6iAlTVPs1g5dQamPmNhmFys55Fe4Nod2qkpx2sdSjIsMsLgFF/nzoaqPe5fsDCFI+/FEoLBw4bKSsfIm+03aQRp8KxQW9jloMGgMsU5vsC0quLY7fWXsffZ9si1EalOfcozmc7zqP/oz8ix2t8gpdYUJ7s24Ir4Po8xE9kI7LeUYKAgJ+uX9EQ2AgJbj6DjjHHCKLK7eKa/sqYRa/I2OGzDvgJX4f7vO9oIY3ckj/7tPP6Q8RsNjl6poQuGVUlyfV9/ANiw4nV0AgAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/32QT2sCMRDFP4v3mNqlh16tBxEExRWvZTaO62g2WZKJIst+98b1z6ZSCoHM+83LSyaZzEYfcjSAsx+q7XGoqZBNzqCOIqLvBlUmm02txGRnNsuJWIZCk8pDYZCvrK9WNjCuodDY856NvbeKgMmap1ksHZ2Asc+YGUYX62mkZ7jcL72rMcdn7Ss0LHJUwRFfps6GurvuXzAzpUPvxRyCUfs1VrWOkVfbb9IK1OCZlLawLUCDUWTKU/yBcV3Hsbvnz2Pvq+uh6yJSnfrIM5q751H/0Z+gY9pdIabWFCen1uDK+D+PMRPZCtUfqcBAiU42L+mJbAUEtl6BjjPGCaPIb+KZ/sraVqzQ2+BUF7YIXAduhbFblAf/dnr/lHGNBgdPNHTBMFUoV7f9B1JrOFBpAgAA"
    },
    "Metadata": {
     "aws:cdk:path": "NginxProxyStackThree/CDKMetadata/Default"
