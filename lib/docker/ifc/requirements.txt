@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+ifcopenshell
+ifcpatch
+python-multipart
+boto3

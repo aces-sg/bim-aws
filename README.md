@@ -107,3 +107,10 @@ Autoscaling group is applied to multiple target groups. ![alt text](image-2.png)
 
 ssh -i default-bim.pem
 ubuntu@ec2-52-221-227-20.ap-southeast-1.compute.amazonaws.com
+
+### Docker testing script
+
+```
+docker build -t ifcapi .
+docker run -p 8069:8069 ifcapi
+```

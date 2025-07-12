@@ -1,12 +1,15 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
-import { Tags, Duration, RemovalPolicy } from "aws-cdk-lib";
+import { Tags, RemovalPolicy } from "aws-cdk-lib";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as s3 from "aws-cdk-lib/aws-s3";
-import * as apigatewayv2 from "aws-cdk-lib/aws-apigatewayv2-alpha";
-import * as integrations from "aws-cdk-lib/aws-apigatewayv2-integrations-alpha";
+import * as ecr_assets from "aws-cdk-lib/aws-ecr-assets";
+import { HttpApi, HttpMethod, VpcLink } from "@aws-cdk/aws-apigatewayv2-alpha";
+import { HttpAlbIntegration } from "@aws-cdk/aws-apigatewayv2-integrations-alpha";
+import * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
+import * as ecs_patterns from "aws-cdk-lib/aws-ecs-patterns";
 
 export class IfcApiCdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -44,33 +47,70 @@ export class IfcApiCdkStack extends cdk.Stack {
       taskRole,
     });
 
-    const container = apiTaskDef.addContainer("IfcApi", {
-      image: ecs.ContainerImage.fromAsset("../path-to-your-docker-context"),
+    const image = new ecr_assets.DockerImageAsset(this, "IfcApiImage", {
+      directory: "lib/docker/ifc",
+      platform: ecr_assets.Platform.LINUX_AMD64,
+    });
+
+    apiTaskDef.addContainer("IfcApi", {
+      image: ecs.ContainerImage.fromDockerImageAsset(image),
       logging: ecs.LogDrivers.awsLogs({ streamPrefix: "ifcapi" }),
       portMappings: [{ containerPort: 8069 }],
       environment: {
         BUCKET_NAME: bucket.bucketName,
       },
+      healthCheck: {
+        command: [
+          "CMD-SHELL",
+          "curl -f http://localhost:8069/health || exit 1",
+        ],
+        interval: cdk.Duration.seconds(30),
+        timeout: cdk.Duration.seconds(5),
+        retries: 3,
+        startPeriod: cdk.Duration.seconds(10),
+      },
     });
 
-    const apiService = new ecs.FargateService(this, "IfcApiService", {
-      cluster,
-      taskDefinition: apiTaskDef,
-      assignPublicIp: true,
-      desiredCount: 1,
+    const lbFargateService =
+      new ecs_patterns.ApplicationLoadBalancedFargateService(
+        this,
+        "IfcApiService",
+        {
+          cluster,
+          taskDefinition: apiTaskDef,
+          publicLoadBalancer: true,
+          desiredCount: 1,
+        }
+      );
+
+    // Set ALB health check to match your app
+    lbFargateService.targetGroup.configureHealthCheck({
+      path: "/health",
+      healthyHttpCodes: "200",
+      interval: cdk.Duration.seconds(30),
+      timeout: cdk.Duration.seconds(5),
+      unhealthyThresholdCount: 2,
+      healthyThresholdCount: 2,
     });
 
-    const httpApi = new apigatewayv2.HttpApi(this, "IfcHttpApi", {
+    const vpcLink = new VpcLink(this, "IfcVpcLink", {
+      vpc,
+    });
+
+    const albIntegration = new HttpAlbIntegration(
+      "IfcAlbIntegration",
+      lbFargateService.listener,
+      { vpcLink }
+    );
+
+    const httpApi = new HttpApi(this, "IfcHttpApi", {
       description: "API Gateway for IFC Fargate Service",
     });
 
     httpApi.addRoutes({
       path: "/",
-      methods: [apigatewayv2.HttpMethod.GET, apigatewayv2.HttpMethod.POST],
-      integration: new integrations.HttpServiceDiscoveryIntegration(
-        "IfcServiceIntegration",
-        apiService.cloudMapService!
-      ),
+      methods: [HttpMethod.GET, HttpMethod.POST],
+      integration: albIntegration,
     });
   }
 }
