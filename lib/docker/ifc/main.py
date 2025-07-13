@@ -1,5 +1,7 @@
 import ifcpatch
 import ifcopenshell
+import os
+
 
 def merge_ifc_files(input_files, output_path):
     if len(input_files) < 2:

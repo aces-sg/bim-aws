@@ -41,6 +41,12 @@ export class IfcApiCdkStack extends cdk.Stack {
 
     bucket.grantReadWrite(taskRole);
 
+    new cdk.CfnOutput(this, "IfcApiBucketName", {
+      value: bucket.bucketName,
+      description: "The S3 bucket used for storing merged IFC files",
+      exportName: "IfcApiBucketName", // optional
+    });
+
     const apiTaskDef = new ecs.FargateTaskDefinition(this, "IfcApiTaskDef", {
       memoryLimitMiB: 2048,
       cpu: 1024,
