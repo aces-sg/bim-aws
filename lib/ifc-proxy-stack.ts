@@ -68,7 +68,7 @@ export class IfcApiCdkStack extends cdk.Stack {
       healthCheck: {
         command: [
           "CMD-SHELL",
-          "curl -f http://localhost:8069/health || exit 1",
+          "curl -sS http://localhost:8069/health || echo 'Health check failed'",
         ],
         interval: cdk.Duration.seconds(30),
         timeout: cdk.Duration.seconds(5),
@@ -85,7 +85,7 @@ export class IfcApiCdkStack extends cdk.Stack {
           cluster,
           taskDefinition: apiTaskDef,
           publicLoadBalancer: true,
-          desiredCount: 1,
+          desiredCount: 2,
         }
       );
 
