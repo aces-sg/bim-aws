@@ -1,0 +1,1 @@
+docker run --platform linux/amd64 -p 8069:8069 ifcmerge:latest
